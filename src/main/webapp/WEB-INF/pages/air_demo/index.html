@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>猪只养殖环境智能空气净化系统</title>
+    <link rel="stylesheet" href="../resources/layui/css/layui.css">
+    <link type="text/css" rel="stylesheet/less" href="../resources/css/common.less" />
+    <link type="text/css" rel="stylesheet/less" href="../resources/css/index.less" />
+    <script src="../resources/js/less.js" ></script>
+    <script src="../resources/js/jquery-3.4.1.min.js" ></script>
+<!--    <script src="../js/echarts.min.js" ></script>-->
+    <script src="../resources/layui/layui.js"></script>
+  </head>
+  <body>
+    <div class="index">
+    	<div class="header">
+    		<div class="header-info fx fx-al-ct fx-js-bt">
+    			<div class="dp-ib" id="Date">
+            <span>年月日</span>
+            <span>星期</span>
+            <span>时：分：秒</span>
+            <span>8°C</span>
+            <img class="cloud" src="../resources/assets/img/cloud.png" alt="" />
+          </div>
+    			<div class="dp-ib c-p">
+            <img class="portrait va-m" src="../resources/assets/img/admin.png" alt="" />
+            <span class="admin">admin</span>
+            <a href="../System/main" style="color:#ffffff; font-Weight:bold;">返回主页</a>
+          </div>
+    		</div>
+        <div class="banner ta-c">
+          <p class="headline bold">猪只养殖环境智能空气净化系统</p>
+        </div>
+        <div class="header-base">
+          <form class="layui-form" action="" lay-filter="formtest">
+            <div class="layui-form-item">
+              <label class="layui-form-label">猪舍工作单元</label>
+              <div class="layui-input-block">
+                <input type="radio" name="unit" value="0" title="左单元" checked="">
+                <input type="radio" name="unit" value="1" title="右单元">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">除臭剂</label>
+              <div class="layui-input-block">
+                <input type="radio" name="ccj" value="1" title="有" >
+                <input type="radio" name="ccj" value="0" title="无">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="header-time">
+          <div class="item-item">
+            <span class="time-label">刮粪时段：</span>
+            <div class="layui-input-inline">
+              <input type="text" class="layui-input" id="time1" placeholder="时段1">
+            </div>
+            <div class="layui-input-inline">
+              <input type="text" class="layui-input" id="time2" placeholder="时段2">
+            </div>
+          </div>
+          <div class="item-item">
+            <span class="time-label va-m">自定义重点除臭时段：</span>
+            <div class="layui-input-inline">
+              <input type="text" class="layui-input" id="time3" placeholder="时段1">
+            </div>
+            <div class="layui-input-inline">
+              <input type="text" class="layui-input" id="time4" placeholder="时段2">
+            </div>
+          </div>
+        </div>
+    	</div>
+    	<div class="content fx fx-js-bt">
+        <div class="first fx fx-v">
+          <div class="first-1 box bs-bb">
+            <i class="tl corner"></i>
+            <i class="tr corner"></i>
+            <i class="bl corner"></i>
+            <i class="br corner"></i>
+            <p class="title">参数设定</p>
+            <div class="sliders">
+              <p class="slider-title">PH值</p>
+              <div class="slider-wrapper">
+                <div class="slider" id="n0"></div>
+              </div>
+              <div class="slider-tips fx fx-js-bt">
+                <span>0</span>
+                <span>25</span>
+                <span>50</span>
+                <span>75</span>
+                <span>100</span>
+              </div>
+              <p class="slider-title">EC值</p>
+              <div class="slider-wrapper">
+                <div class="slider" id="n1"></div>
+              </div>
+              <div class="slider-tips fx fx-js-bt">
+                <span>0</span>
+                <span>25</span>
+                <span>50</span>
+                <span>75</span>
+                <span>100</span>
+              </div>
+              <p class="slider-title">液位</p>
+              <div class="slider-wrapper">
+                <div class="slider" id="n2"></div>
+              </div>
+              <div class="slider-tips fx fx-js-bt">
+                <span>0</span>
+                <span>25</span>
+                <span>50</span>
+                <span>75</span>
+                <span>100</span>
+              </div>
+              <p class="slider-title">压差</p>
+              <div class="slider-wrapper">
+                <div class="slider" id="n3"></div>
+              </div>
+              <div class="slider-tips fx fx-js-bt" >
+                <span>0</span>
+                <span>250</span>
+                <span>500</span>
+                <span>750</span>
+                <span>1000</span>
+              </div>
+            </div>
+          </div>
+          <div class="first-2 box bs-bb">
+            <i class="tl corner"></i>
+            <i class="tr corner"></i>
+            <i class="bl corner"></i>
+            <i class="br corner"></i>
+            <p class="title">实时状态</p>
+            <div class="o-a">
+              <p>2021年04月21日 19:30 停喷阀关闭</p>
+              <p>2021年04月22日 19:30 停喷阀关闭</p>
+            </div>
+          </div>
+        </div>
+        <div class="second fx fx-v" id="mode-control">
+          <div class="second-1 box bs-bb">
+            <i class="tl corner"></i>
+            <i class="tr corner"></i>
+            <i class="bl corner"></i>
+            <i class="br corner"></i>
+            <div class="switches">
+              <div class="switch-btn left">经济模式</div><div class="switch-btn right active">高效模式</div>
+            </div>
+            <div class="switch equip-s" onclick="trigger(this, 'equip-s')">
+              <div class="switch-close">关闭</div>
+              <img src="../resources/assets/img/switch_btn.png" alt="" />
+            </div>
+            <div class="des" id="board">
+
+            </div>
+            <div class="content-image">
+              <img id="chuchouguan-i" class="chuchouguan" src="../resources/assets/img/chuchouguan.png" alt="" />
+              <img id="chuchouguan-g" class="chuchouguan" src="../resources/assets/gif/chuchouguan.gif" alt="" />
+              <span class="t-ccjg">除臭剂罐</span>
+              <img id="y-straight-i" class="y-straight" src="../resources/assets/img/y_straight.png" alt="" />
+              <img id="y-straight-g" class="y-straight" src="../resources/assets/gif/y_straight.gif" alt="" />
+              <img class="chuchoubeng" src="../resources/assets/img/chuchoubeng.png" alt="" />
+              <span class="t-ccjb">除臭剂泵</span>
+              <img id="y-curved-i" class="y-curved" src="../resources/assets/img/y_curved.png" alt="" />
+              <img id="y-curved-g" class="y-curved" src="../resources/assets/gif/y_curved.gif" alt="" />
+
+              <img id="lb-cur1-i" class="lb-cur-1" src="../resources/assets/img/lb_curved1.png" alt="" />
+              <img id="lb-cur1-g" class="lb-cur-1" src="../resources/assets/gif/lb_curved1.gif" alt="" />
+              <img id="lb-cur2-i" class="lb-cur-2" src="../resources/assets/img/lb_curved2.png" alt="" />
+              <img id="lb-cur2-g" class="lb-cur-2" src="../resources/assets/gif/lb_curved2.gif" alt="" />
+              <img id="xhb" class="xhb" src="../resources/assets/img/xxp_beng.png" alt="" />
+              <span class="t-xhb">循环泵</span>
+              <img id="shuichi-i" class="shuichi" src="../resources/assets/img/shuichi.png" alt="" />
+              <img id="shuichi-g" class="shuichi" src="../resources/assets/gif/shuichi.gif" alt="" />
+              <span class="t-cdc">沉淀池</span>
+              <span class="t-xyc">蓄水池</span>
+              <img id="x-yws-i" class="x-yws" src="../resources/assets/img/v_yewei_show.png" alt="" />
+              <img id="x-yws-g" class="x-yws" src="../resources/assets/gif/v_yewei_show.gif" alt="" />
+              <img class="yewei" src="../resources/assets/img/yewei.png" alt="" />
+              <span class="t-ywgd special">液位过低</span>
+              <span class="t-yw">液位</span>
+              <img class="yewei_flow" src="../resources/assets/img/yewei_flow.png" alt="" />
+
+              <img class="xidibeng" src="../resources/assets/img/xxp_beng.png" alt="" />
+              <span class="t-cdb">洗涤泵</span>
+              <img id="b-curved2-i" class="b-curved2" src="../resources/assets/img/b_curved2.png" alt="" />
+              <img id="b-curved2-g" class="b-curved2" src="../resources/assets/gif/b_curved2.gif" alt="" />
+              <img id="b-curved-i" class="b-curved" src="../resources/assets/img/b_curved.png" alt="" />
+              <img id="b-curved-g" class="b-curved" src="../resources/assets/gif/b_curved.gif" alt="" />
+              <img id="lg-curved-i" class="lg-curved" src="../resources/assets/img/lg_curved.png" alt="" />
+              <img id="lg-curved-g" class="lg-curved" src="../resources/assets/gif/lg_curved.gif" alt="" />
+
+              <img class="tingpenfa" src="../resources/assets/img/tingpenfa.png" alt="" />
+              <span class="t-tpf">停喷阀</span>
+              <img id="b-straight-i" class="b-straight" src="../resources/assets/img/b_straight.png" alt="" />
+              <img id="b-straight-g" class="b-straight" src="../resources/assets/gif/b_straight.gif" alt="" />
+              <img class="yacha_1" src="../resources/assets/img/yacha_1.png" alt="" />
+              <img class="yacha_2" src="../resources/assets/img/yacha_2.png" alt="" />
+              <img class="yacha_3" src="../resources/assets/img/yacha_3.png" alt="" />
+              <img class="yacha_4" src="../resources/assets/img/yacha_4.png" alt="" />
+              <img id="y-yws-i" class="y-yws" src="../resources/assets/img/h_yewei_show.png" alt="" />
+              <img id="y-yws-g" class="y-yws" src="../resources/assets/gif/h_yewei_show.gif" alt="" />
+              <span class="t-lzgd special">帘阻过大</span>
+              <span class="t-yc">压差</span>
+
+              <img class="rongsuan" src="../resources/assets/img/rongsuan.png" alt="" />
+              <img class="ph" src="../resources/assets/img/PH.png" alt="" />
+              <img class="ec" src="../resources/assets/img/EC.png" alt="" />
+              <img id="p-yws-i" class="p-yws" src="../resources/assets/img/v_yewei_show.png" alt="" />
+              <img id="p-yws-g" class="p-yws" src="../resources/assets/gif/v_yewei_show.gif" alt="" />
+              <img id="e-yws-i" class="e-yws" src="../resources/assets/img/v_yewei_show.png" alt="" />
+              <img id="e-yws-g" class="e-yws" src="../resources/assets/gif/v_yewei_show.gif" alt="" />
+              <span class="t-qsbj special">缺酸报警</span>
+              <span class="t-ph">PH</span>
+              <span class="t-ec">EC</span>
+              <span class="t-rygs special">溶液过酸</span>
+              <span class="t-rywz special">溶液污浊</span>
+
+              <img class="pff" src="../resources/assets/img/xxp_beng.png" alt="" />
+              <span class="t-pff">排废泵</span>
+              <img id="lg-straight-i" class="lg-straight" src="../resources/assets/img/lg_straight.png" alt="" />
+              <img id="lg-straight-g" class="lg-straight" src="../resources/assets/gif/lg_straight.gif" alt="" />
+              <img id="feiyechi-i" class="feiyechi" src="../resources/assets/img/feiyechi.png" alt="" />
+              <img id="feiyechi-g" class="feiyechi" src="../resources/assets/gif/feiyechi.gif" alt="" />
+              <span class="t-fyc">废液池</span>
+
+              <img id="g-curved1-i" class="g-curved1" src="../resources/assets/img/g_curved1.png" alt="" />
+              <img id="g-curved1-g" class="g-curved1" src="../resources/assets/gif/g_curved1.gif" alt="" />
+              <img class="xwb" src="../resources/assets/img/xxp_beng.png" alt="" />
+              <img id="g-curved2-i" class="g-curved2" src="../resources/assets/img/g_curved2.png" alt="" />
+              <img id="g-curved2-g" class="g-curved2" src="../resources/assets/gif/g_curved2.gif" alt="" />
+              <img id="pwc-i" class="pwc" src="../resources/assets/img/feiyechi.png" alt="" />
+              <img id="pwc-g" class="pwc" src="../resources/assets/gif/feiyechi.gif" alt="" />
+              <span class="t-xwb">吸污泵</span>
+              <span class="t-pwc">排污池</span>
+            </div>
+          </div>
+          <div class="second-2 box bs-bb">
+            <i class="tl corner"></i>
+            <i class="tr corner"></i>
+            <i class="bl corner"></i>
+            <i class="br corner"></i>
+            <p class="title">系统控制</p>
+            <div class="fx fx-js-bt content">
+              <div class="switch chuchou" id="n26" onclick="trigger(this, 'chuchou',true)">
+                <div class="switch-close">关闭</div>
+                <img src="../resources/assets/img/switch_btn.png" alt="" />
+                <span>除臭剂泵</span>
+              </div>
+              <div class="switch xidi" id="n23" onclick="trigger(this, 'xidi',true)">
+                <div class="switch-close">关闭</div>
+                <img src="../resources/assets/img/switch_btn.png" alt="" />
+                <span>洗涤泵1</span>
+              </div>
+              <div class="switch xidi" id="n25" onclick="trigger(this, 'xidi',true)">
+                <div class="switch-close">关闭</div>
+                <img src="../resources/assets/img/switch_btn.png" alt="" />
+                <span>洗涤泵3</span>
+              </div>
+              <div class="switch" id="n30" onclick="trigger(this, 'xunhuan',true)">
+                <div class="switch-close">关闭</div>
+                <img src="../resources/assets/img/switch_btn.png" alt="" />
+                <span>循环泵</span>
+              </div>
+              <div class="switch xiwu" id="n29" onclick="trigger(this, 'xiwu',true)">
+                <div class="switch-close">关闭</div>
+                <img src="../resources/assets/img/switch_btn.png" alt="" />
+                <span>吸污泵</span>
+              </div>
+              <div class="switch tingpen" id="n20" onclick="trigger(this, 'tingpen',true)">
+                <div class="switch-close">关闭</div>
+                <img src="../resources/assets/img/switch_btn.png" alt="" />
+                <span>停喷阀1</span>
+              </div>
+              <div class="switch tingpen" id="n22" onclick="trigger(this, 'tingpen',true)">
+                <div class="switch-close">关闭</div>
+                <img src="../resources/assets/img/switch_btn.png" alt="" />
+                <span>停喷阀3</span>
+              </div>
+              <div class="switch paiye" id="n28" onclick="trigger(this, 'paiye',true)">
+                <div class="switch-close">关闭</div>
+                <img src="../resources/assets/img/switch_btn.png" alt="" />
+                <span>排液泵</span>
+              </div>
+            </div>
+            <div class="fx fx-js-bt content">
+              <div class="switch"></div>
+              <div class="switch xidi" id="n24" onclick="trigger(this, 'xidi',true)">
+                <div class="switch-close">关闭</div>
+                <img src="../resources/assets/img/switch_btn.png" alt="" />
+                <span>洗涤泵2</span>
+              </div>
+              <div class="switch"></div>
+              <div class="switch"></div>
+              <div class="switch"></div>
+              <div class="switch tingpen" id="n21" onclick="trigger(this, 'tingpen',true)">
+                <div class="switch-close">关闭</div>
+                <img src="../resources/assets/img/switch_btn.png" alt="" />
+                <span>停喷阀2</span>
+              </div>
+              <div class="switch"></div>
+              <div class="switch"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript" charset="utf-8" src="../resources/js/index.js"></script>
+</html>

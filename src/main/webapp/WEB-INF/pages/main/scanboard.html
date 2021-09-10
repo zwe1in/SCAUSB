@@ -1,0 +1,664 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+<title>智能猪只数据管理平台</title>
+<link rel="stylesheet" type="text/css" href="../resources/css/reset.css" />
+<link rel="stylesheet" type="text/css" href="../resources/css/scanboard.css" />
+<link rel="stylesheet" type="text/css" href="../resources/css/animsition.css" />
+<link rel="stylesheet" type="text/css" href="../resources/css/jquery.shCircleLoader.css" />
+<link rel="stylesheet" type="text/css" href="../resources/css/cascader.css" />
+<script type="text/javascript" src="../resources/js/sw/jquery.min.js"></script>
+<script type="text/javascript" src="../resources/js/sw/jquery.shCircleLoader-min.js"></script>
+<script type="text/javascript" src="../resources/js/sw/cascader.js"></script>
+</head>
+<body>
+	<div id="loader"></div>
+	<script type="text/javascript">
+		$('#loader').shCircleLoader({color: "#00deff"});
+	</script>
+	<!--Top Start!-->
+	<div class="scanboardWp animsition">
+		<div id="top">
+			<div class="wp clearfix">
+				<div class="left pageTit">
+					<a class="summaryBtn" href="javascript:;">异常反馈看板</a>
+				</div>
+				<div class="center topLogo">
+					<a href="#">
+            <img src="../resources/images/images/logo1.png">
+          </a>
+				</div>
+				<div class="right topBar">
+					<div class="topTime">时间加载中...</div>
+					<div class="clearfix">
+						<a href="../System/system?type=feed" class="signOut fr">返回</a>
+						<div class="company fr">
+							<h3>迦恩科技</h3>
+							<div class="dropdown">
+								<a href="#">迦恩科技</a>
+								<a href="#">迦恩科技</a>
+								<a href="#">迦恩科技</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--Top End!-->
+		
+		<!--Main Start!-->
+		<div id="main" class="wp clearfix">
+			<div class="left">
+				<!--猪只采食反馈-->
+				<div class="item waybill">
+					<div class="itemTit">
+						<span class="border-yellow">猪只采食反馈</span>
+					</div>
+					<div class="itemCon itembg">
+						<div class="progress" progress="80%" trend="up">
+							<h3 class="clearfix"><span>正常</span><i>80头</i></h3>
+							<div class="progressBar">
+								<span></span>
+							</div>
+							<h4>0%</h4>
+							<img class='arrow' src='../resources/images/images/arrow_down.png' alt='' />
+						</div>
+						<div class="progress" progress="15%" trend="up">
+							<h3 class="clearfix"><span>刺激下料</span><i>15头</i></h3>
+							<div class="progressBar">
+								<span></span>
+							</div>
+							<h4>0%</h4>
+							<img class='arrow' src='../resources/images/images/arrow_down.png' alt='' />
+						</div>
+						<div class="progress" progress="5%" trend="down">
+							<h3 class="clearfix"><span>异常</span><i>5头</i></h3>
+							<div class="progressBar">
+								<span></span>
+							</div>
+							<h4>0%</h4>
+							<img class='arrow' src='../resources/images/images/arrow_down.png' alt='' />
+						</div>
+					</div>
+				</div>
+
+        <!-- 猪只饮水反馈 -->
+        <div class="item waybill">
+          <div class="itemTit">
+            <span class="border-green">猪只饮水反馈</span>
+          </div>
+          <div class="itemCon itembg">
+            <div class="progress" progress="80%" trend="up">
+              <h3 class="clearfix"><span>正常</span><i>80头</i></h3>
+              <div class="progressBar">
+                <span></span>
+              </div>
+              <h4>0%</h4>
+              <img class='arrow' src='../resources/images/images/arrow_down.png' alt='' />
+            </div>
+            <div class="progress" progress="5%" trend="down">
+              <h3 class="clearfix"><span>异常</span><i>5头</i></h3>
+              <div class="progressBar">
+                <span></span>
+              </div>
+              <h4>0%</h4>
+              <img class='arrow' src='../resources/images/images/arrow_down.png' alt='' />
+            </div>
+          </div>
+        </div>
+
+				<!--猪只均碰杆反馈次数-->
+        <div class="item waybill">
+          <div class="itemTit">
+            <span class="border-blue">猪只均碰杆反馈次数</span>
+          </div>
+          <div class="itemCon itembg">
+            <div class="progress" progress="80%" trend="up">
+              <h3 class="clearfix"><span>正常</span><i>80头</i></h3>
+              <div class="progressBar">
+                <span></span>
+              </div>
+              <h4>0%</h4>
+              <img class='arrow' src='../resources/images/images/arrow_down.png' alt='' />
+            </div>
+            <div class="progress" progress="5%" trend="down">
+              <h3 class="clearfix"><span>异常</span><i>5头</i></h3>
+              <div class="progressBar">
+                <span></span>
+              </div>
+              <h4>0%</h4>
+              <img class='arrow' src='../resources/images/images/arrow_down.png' alt='' />
+            </div>
+          </div>
+        </div>
+			</div>
+
+			<div class="center">
+				<div class="centerWp">
+					<!--中间大地图-->
+					<div class="mapContainer">
+						<div class="btnLayer">
+							<div class="search">
+								<div class="searchInner">
+									<a href="javascript:;" class="searchBtn"><span class="icoSearch"></span></a>
+									<form class="searchForm">
+										<button class="icoSearch"></button>
+										<input type="text" name="" placeholder="请搜索车辆">
+									</form>
+								</div>
+							</div>
+							<a href="javascript:;" class="infoBtn"><span class="icoCar"></span></a>
+						</div>
+						<div id="myMap" class="item"></div>
+					</div>
+					
+					<!--日饲喂量统计图-->
+					<div class="billChart">
+						<div class="itemTit">
+							<span class="border-blue">日饲喂量统计图</span>
+						</div>
+						<div id="myChart1"></div>
+					</div>
+				</div>
+			</div>
+
+			<div class="right">
+				<!--饲喂设备总量-->
+				<div class="item total itembg">
+					<div class="itemTit">
+						<span class="border-yellow">饲喂设备总量</span>
+					</div>
+					<div class="itemCon">
+						<div class="totalNum"><strong id="totalNum" total="207">0</strong><span>台</span></div>
+					</div>
+				</div>
+
+				<!--设备在线详情-->
+				<div class="item basicInfo">
+					<div class="itemTit">
+						<span class="border-green">设备在线详情</span>
+					</div>
+					<div class="itemCon itembg">
+						<div class="infoPie">
+							<ul class="clearfix">
+								<li class="color-green">
+									<span class="border-green" id="indicator1" total="132">0</span>
+									<p>在线设备</p>
+								</li>
+								<li class="color-yellow">
+									<span class="border-yellow" id="indicator2" total="65">0</span>
+									<p>待机设备</p>
+								</li>
+								<li class="color-red">
+									<span class="border-red" id="indicator3" total="10">0</span>
+									<p>故障设备</p>
+								</li>
+							</ul>
+							<div id="indicatorContainer"></div>
+						</div>
+					</div>
+				</div>
+
+				<!--设备日志-->
+				<div class="item billState">
+					<div class="itemTit">
+						<span class="border-blue">设备日志</span>
+					</div>
+					<div class="itemCon">
+						<div class="StateBox">
+							<div class="StateTit">
+								<span>设备ID</span>
+								<span>使用时间</span>
+								<span>状态详情</span>
+							</div>
+							<div id="FontScroll">
+								<ul>
+									<li>
+										<div class="fontInner clearfix">
+											<span>ZC1712120023</span>
+											<span>2小时15分</span>
+											<span>完成当天计划下料
+												<!-- <div class="progress" progress="78%">
+													<div class="progressBar">
+														<span></span>
+													</div>
+													<h3><i><h4></h4></i></h3>
+												</div> -->
+											</span>
+										</div>
+									</li>
+									<li>
+										<div class="fontInner clearfix">
+											<span>ZC1712120023</span>
+											<span>2小时15分</span>
+											<span>完成当前分餐计划</span>
+										</div>
+									</li>
+									<li>
+										<div class="fontInner clearfix">
+											<span>ZC1712120023</span>
+											<span>2小时15分</span>
+											<span>完成当前分餐计划</span>
+										</div>
+									</li>
+									<li>
+										<div class="fontInner clearfix">
+											<span>ZC1712120023</span>
+											<span>2小时15分</span>
+											<span>完成当前分餐计划</span>
+										</div>
+									</li>
+									<li>
+										<div class="fontInner clearfix">
+											<span>ZC1712120023</span>
+											<span>2小时15分</span>
+											<span>完成当前分餐计划</span>
+										</div>
+									</li>
+									<li>
+										<div class="fontInner clearfix">
+											<span>ZC1712120023</span>
+											<span>2小时15分</span>
+											<span>完成当前分餐计划</span>
+										</div>
+									</li>
+									<li>
+										<div class="fontInner clearfix">
+											<span>ZC1712120023</span>
+											<span>2小时15分</span>
+											<span>完成当前分餐计划</span>
+										</div>
+									</li>
+									<li>
+										<div class="fontInner clearfix">
+											<span>ZC1712120023</span>
+											<span>2小时15分</span>
+											<span>完成当前分餐计划</span>
+										</div>
+									</li>
+									<li>
+										<div class="fontInner clearfix">
+											<span>ZC1712120023</span>
+											<span>2小时15分</span>
+											<span>完成当前分餐计划</span>
+										</div>
+									</li>
+									<li>
+										<div class="fontInner clearfix">
+											<span>ZC1712120023</span>
+											<span>2小时15分</span>
+											<span>碰杆次数</span>
+										</div>
+									</li>
+									<li>
+										<div class="fontInner clearfix">
+											<span>ZC1712120023</span>
+											<span>2小时15分</span>
+											<span>碰杆次数</span>
+										</div>
+									</li>
+									<li>
+										<div class="fontInner clearfix">
+											<span>ZC1712120023</span>
+											<span>2小时15分</span>
+											<span>碰杆次数</span>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--Main End!-->
+	</div>
+
+	<div class="filterbg"></div>
+	<div class="popup">
+		<a href="javascript:;" class="popupClose"></a>
+    <div class='errorSummary'>
+      <div class='eItem'>
+        <h3>猪只采食异常反馈</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>猪只ID</th>
+              <th>设备ID</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1234567</td>
+              <td>1234567</td>
+            </tr>
+            <tr>
+              <td>1234567</td>
+              <td>1234567</td>
+            </tr>
+            <tr>
+              <td>1234567</td>
+              <td>1234567</td>
+            </tr>
+            <tr>
+              <td>1234567</td>
+              <td>1234567</td>
+            </tr>
+            <tr>
+              <td>1234567</td>
+              <td>1234567</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class='eItem'>
+        <h3>猪只饮水异常反馈</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>猪只ID</th>
+              <th>设备ID</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1234567</td>
+              <td>1234567</td>
+            </tr>
+            <tr>
+              <td>1234567</td>
+              <td>1234567</td>
+            </tr>
+            <tr>
+              <td>1234567</td>
+              <td>1234567</td>
+            </tr>
+            <tr>
+              <td>1234567</td>
+              <td>1234567</td>
+            </tr>
+            <tr>
+              <td>1234567</td>
+              <td>1234567</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class='eItem'>
+        <h3>猪只均碰杆异常反馈</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>猪只ID</th>
+              <th>设备ID</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1234567</td>
+              <td>1234567</td>
+            </tr>
+            <tr>
+              <td>1234567</td>
+              <td>1234567</td>
+            </tr>
+            <tr>
+              <td>1234567</td>
+              <td>1234567</td>
+            </tr>
+            <tr>
+              <td>1234567</td>
+              <td>1234567</td>
+            </tr>
+            <tr>
+              <td>1234567</td>
+              <td>1234567</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class='eItem'>
+        <h3>故障设备</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>猪只ID</th>
+              <th>设备ID</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1234567</td>
+              <td>1234567</td>
+            </tr>
+            <tr>
+              <td>1234567</td>
+              <td>1234567</td>
+            </tr>
+            <tr>
+              <td>1234567</td>
+              <td>1234567</td>
+            </tr>
+            <tr>
+              <td>1234567</td>
+              <td>1234567</td>
+            </tr>
+            <tr>
+              <td>1234567</td>
+              <td>1234567</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+	</div>
+
+	<div class="equipInfo">
+		<a href="javascript:;" class="equipClose"></a>
+		<div class="infoBox">
+			<div class="infoTop">
+				<div class="infoTit">
+					<img src="../resources/images/images/tit3.png">
+				</div>
+			</div>
+			<div class="infoMain">
+        <div class="pig">
+          <div class="photo">
+            <img src="../resources/images/images/pig.png">
+          </div>
+        </div>
+				<div class="infoLeft fl">
+          <div class="cascaderbox" id="cascaderbox">
+            <div class="inputbox">
+                <span class="arrdown"></span>
+                <input autocomplete="off" class="searchtxt" type="text" placeholder="市、场、舍、单体">
+                <span class="labelshow"></span>
+            </div>
+            <div class="dlist hid"> </div>
+            <div class="dlist searchdlist hid"></div>
+          </div>
+          <div class='equipTable'>
+            <table>
+              <thead>
+                <tr>
+                  <th>设备ID</th>
+                  <th>周期超出</th>
+                  <th>状态</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>A345634</td>
+                  <td>123456</td>
+                  <td class="work">正常</td>
+                </tr>
+                <tr>
+                  <td>A345634</td>
+                  <td>123456</td>
+                  <td class="nowork">掉线</td>
+                </tr>
+                <tr>
+                  <td>A345634</td>
+                  <td>123456</td>
+                  <td class="work">正常</td>
+                </tr>
+                <tr>
+                  <td>A345634</td>
+                  <td>123456</td>
+                  <td class="nowork">掉线</td>
+                </tr>
+                <tr>
+                  <td>A345634</td>
+                  <td>123456</td>
+                  <td class="work">正常</td>
+                </tr>
+                <tr>
+                  <td>A345634</td>
+                  <td>123456</td>
+                  <td class="error">异常</td>
+                </tr>
+                <tr>
+                  <td>A345634</td>
+                  <td>123456</td>
+                  <td class="work">正常</td>
+                </tr>
+                <tr>
+                  <td>A345634</td>
+                  <td>123456</td>
+                  <td class="error">异常</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+				</div>
+				<div class="infoRight fr">
+					<div class="rightWp">
+						<div class="carIntro">
+							<div class="introBox fl">
+								<div class="carText fl clearfix">
+									<p>猪只ID：000</p>
+									<p>日龄：4.45小时</p>
+									<p>猪只栏龄：2018-1-12</p>
+									<p>总共分段数：20.0</p>
+                  <p>分段编号：000</p>
+                  <p>分段第几天：20.0</p>
+                  <p>当前分餐号：20.0</p>
+                  <p>产前使用段数：15</p>
+                  <p>产后使用段数：15</p>
+                  <p>产后标志位：5</p>
+									<p>当前栏位温度：15</p>
+                  <p>当前栏位湿度：15</p>
+                  <p>入栏标志位：15</p>
+                  <p class='width100'>每日最后一餐编号：20.0</p>
+								</div>
+							</div>
+              <div class="introBox fr">
+                <div class="carText fl clearfix">
+                  <p>计划下料量：0</p>
+                  <p>已下料量：0</p>
+                  <p>计划下水量：0</p>
+                  <p>已下水量：0</p>
+                  <p class='width100'>今天计划下料量(整天)：0</p>
+                  <p class='width100'>今天完成下料量(整天)：0</p>
+                  <p>额外下料量：0</p>
+                  <p>已完成额外下料量：0</p>
+                  <p>该餐碰杆次数：0</p>
+                  <p>今天碰杆次数：0</p>
+                  <p>今天已下拌料水量：0</p>
+                  <p>今天已下洗槽水量：0</p>
+                  <p>人工下料标志：0</p>
+                  <p>人工下水标志：0</p>
+                  <p class='width100'>完成当天额外下料标志：0</p>
+                  <p class='width100'>完成分餐计划下料标志：0</p>
+                  <p class='width100'>完成当前分餐计划下料标志：0</p>
+                  <p>配置标志位：0</p>
+                  <p>设备暂停标志：0</p>
+                </div>
+              </div>
+						</div>
+						<div class="timetable">
+							<div class="topTool">
+								<div class="topBtns fr">
+									<a href="javascript:;" class="prevWeek">上一天</a>
+									<a href="javascript:;" class="nextWeek">下一天</a>
+								</div>
+							</div>
+							<div class="tiemWp">
+                <div class='myChart2'>
+                  <div id='myChart2'></div>
+                </div>
+								<div class="totalTable">
+									<div class="totalTit">
+										<span>总下水</span>
+										<span>总下料/额外</span>
+									</div>
+									<div class="totalData">
+										<div class="totalItem">
+											<div class="space1"></div>
+											<div class="tatleWp">
+												<span>0.00</span>
+												<span>0/0</span>
+											</div>
+											<div class="totalBar"></div>
+										</div>
+										<div class="totalItem">
+											<div class="space1"></div>
+											<div class="tatleWp">
+												<span>0.00</span>
+												<span>0/0</span>
+											</div>
+											<div class="totalBar"></div>
+										</div>
+										<div class="totalItem">
+											<div class="space1"></div>
+											<div class="tatleWp">
+												<span>0.00</span>
+												<span>0/0</span>
+											</div>
+											<div class="totalBar"></div>
+										</div>
+										<div class="totalItem">
+											<div class="space1"></div>
+											<div class="tatleWp">
+												<span>0.00</span>
+												<span>0/0</span>
+											</div>
+											<div class="totalBar"></div>
+										</div>
+										<div class="totalItem">
+											<div class="space1"></div>
+											<div class="tatleWp">
+												<span>0.00</span>
+												<span>0/0</span>
+											</div>
+											<div class="totalBar"></div>
+										</div>
+										<div class="totalItem">
+											<div class="space1"></div>
+											<div class="tatleWp">
+												<span>0.00</span>
+												<span>0/0</span>
+											</div>
+											<div class="totalBar"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<canvas id="canvas" style="position: absolute;top: 0;left: 0;"></canvas> 
+</body>
+<script type="text/javascript" src="../resources/js/sw/bg.js"></script>
+<script type="text/javascript" src="../resources/js/sw/scanboard.js"></script>
+<script type="text/javascript" src="../resources/js/sw/fontscroll.js"></script>
+<script type="text/javascript" src="../resources/js/sw/jquery.animsition.js"></script>
+<script type="text/javascript" src="../resources/js/sw/jquery.nicescroll.js"></script>
+<script type="text/javascript" src="../resources/js/sw/echarts.min.js"></script>
+<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.3&key=f8ffe058b8e6f5b05e8ff43ca4207393"></script>
+</html>

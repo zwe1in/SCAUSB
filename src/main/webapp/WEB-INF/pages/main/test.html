@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>华南农业大学工程学院智慧养殖平台</title>
+        <link rel="stylesheet" href="layui/css/layui.css" media="all">
+        <script src="layui/layui.js"></script>
+        <script src="js/jquery-1.8.0.min.js"></script>
+        <script src="js/echarts.min.js"></script>
+    </head>
+</html>
+<style>
+    #content{
+        width: 800px;
+        height: 800px;
+        margin-left: 500px;
+    }
+</style>
+
+<body>
+
+    <div class="">12313</div>
+            <div class="content_right">
+                <div id="content" class="layui-carousel" >
+                    <div carousel-item>
+                        <div style="background-color:red">条目1</div>
+                        <div style="background-color:green">条目2</div>
+                        <div style="background-color:blue">条目3</div>
+                        <div style="background-color:mediumorchid">条目4</div>
+                        <div style="background-color:orange">条目5</div>
+                    </div>
+                </div>
+            </div>
+
+</body>
+</html>
+
+<script>
+
+
+    layui.use('carousel',function(){
+        var carousel = layui.carousel;
+        carousel.render({
+            elem: '#content',
+            // width: '1000px',
+            // height: '800px',
+            arrow: 'always',
+            anim: 'default',
+            autoplay: false
+        })
+    })
+</script>

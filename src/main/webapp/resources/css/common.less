@@ -1,0 +1,360 @@
+html, body, p, h1, h2, h3, h4, h5, h6, dl, dt, dd, ul, ol, li,
+pre, form, button, input, textarea, th, td, img div{
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-size: 14px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.o-a {
+  overflow: auto;
+}
+
+.bs-bb {
+  box-sizing: border-box;
+}
+
+.c-p {
+  cursor: pointer;
+}
+
+.dp-b {
+  display: block;
+}
+
+.dp-i {
+  display: inline;
+}
+
+.dp-ib {
+  display: inline-block;
+}
+
+.f-l {
+  float: left;
+}
+
+.f-r {
+  float: right;
+}
+
+.clear {
+  clear: both;
+}
+
+.p-r {
+  position: relative;
+}
+
+.p-a {
+  position: absolute;
+}
+
+.ta-l {
+  text-align: left !important;
+}
+
+.ta-r {
+  text-align: right !important;
+}
+
+.ta-c {
+  text-align: center !important;
+}
+
+.va-t {
+  vertical-align: top !important;
+}
+
+.va-m {
+  vertical-align: middle !important;
+}
+
+.va-b {
+  vertical-align: bottom !important;
+}
+
+.fx {
+  display: flex;
+  display: -webkit-flex;
+}
+
+.fx-wrap {
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.fx-n {
+  -webkit-flex: 0 0 auto;
+  flex: 0 0 auto;
+}
+
+.fx-v {
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+
+.fx-al-st {
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
+}
+
+.fx-al-ct {
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.fx-al-end {
+  -webkit-align-items: flex-end;
+  align-items: flex-end;
+}
+
+.fx-js-ct {
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.fx-js-end {
+  -webkit-justify-content: flex-end;
+  justify-content: flex-end;
+}
+
+.fx-js-bt {
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+
+.fx-js-ar {
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+}
+
+.c-t {
+  color: #9ee7ff;
+  font-family: serif;
+  font-size: 15px;
+  line-height: 20px;
+}
+
+.title {
+  background-image: linear-gradient(to right, #3053ae, #021132);
+  padding-left: 5px;
+  font-family: serif;
+  line-height: 30px;
+  height: 30px;
+  font-size: 14px!important;
+  margin-bottom: 5px;
+}
+
+.wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+}
+
+.box {
+  background: #021132;
+  border: 1px solid #3486da;
+  position: relative;
+  padding: 15px;
+  .corner {
+    position: absolute;
+    width: 15px;
+    height: 20px;
+    &.tl {
+      border-left: 4px solid #3486d9;
+      border-top: 4px solid #3486d9;
+      top: -2px;
+      left: -2px;
+    }
+    &.tr {
+      border-right: 4px solid #3486d9;
+      border-top: 4px solid #3486d9;
+      top: -2px;
+      right: -2px;
+    }
+    &.bl {
+      border-left: 4px solid #3486d9;
+      border-bottom: 4px solid #3486d9;
+      left: -2px;
+      bottom: -2px;
+    }
+    &.br {
+      border-right: 4px solid #3486d9;
+      border-bottom: 4px solid #3486d9;
+      bottom: -2px;
+      right: -2px;
+    }
+  }
+}
+
+.switch-btn {
+  text-align: center;
+  line-height: 50px;
+  font-size: 25px;
+  font-family: serif;
+  display: inline-block;
+  width: 16%;
+  height: 55px;
+  vertical-align: middle;
+  background-color: #0e172f;
+  background-image: linear-gradient(#0a1c31, #0e2139);
+  color: #9fa4a8;
+  border-right: 2px solid #1e334e;
+  border-bottom: 2px solid #1e334e;
+  cursor: pointer;
+  &.left {
+    border-radius: 15px 0 0 15px;
+  }
+  &.right {
+    border-radius: 0 15px 15px 0;
+  }
+  &.active {
+    color: #b2d4e9;
+    background-color: #016ac6;
+    background-image: linear-gradient(#018dfc, #015db1);
+    box-shadow: -1px -1px 1px #9bd5fe;
+  }
+}
+
+.switch {
+  cursor: pointer;
+  width: 120px;
+  height: 35px;
+  position: relative;
+  img {
+    position: absolute;
+  }
+  .switch-open {
+    border-radius: 40px;
+    background: #006fd6;
+    height: 35px;
+    line-height: 35px;
+    font-family: serif;
+    box-shadow: 1px 1px 0 #585e6b;
+    text-align: center;
+    & ~img {
+      width: 38px;
+      height: 38px;
+      right: -3%;
+      top: 0;
+    }
+  }
+  .switch-close {
+    text-align: center;
+    border-radius: 40px;
+    background: #666a7f;
+    height: 35px;
+    line-height: 35px;
+    font-family: serif;
+    box-shadow: 1px 1px 0 #585e6b;
+    & ~img {
+      width: 38px;
+      height: 38px;
+      top: 0;
+      right: 75%;
+    }
+  }
+  .slide-left {
+    animation: slideToLeft 0.3s ease-in-out forwards;
+  }
+  .slide-right {
+    animation: slideToRight 0.3s ease-in-out forwards;
+  }
+  @keyframes slideToLeft {
+    from { right: -3%; }
+    to { right: 75%; }
+  }
+  @keyframes slideToRight {
+    from { right: 75%; }
+    to { right: -3%; }
+  }
+}
+
+.primary-btn {
+  display: inline-block;
+  width: 130px;
+  height: 50px;
+  background-image: linear-gradient(#0087fc, #0057b1);
+  box-shadow: -0.8px -0.8px 0 #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 24px;
+  line-height: 50px;
+  font-family: serif;
+}
+
+select {
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.slider-wrapper {
+  background: #1b2847;
+  width: 100%;
+  height: 40px;
+  border-radius: 30px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  .slider {
+    height: 100%;
+  }
+  .layui-slider {
+    border-radius: 30px;
+    background: #0b142a;
+    height: 100%;
+  }
+  .layui-slider-bar {
+    background: #006cd1!important;
+  }
+  .layui-slider-wrap {
+    top: -9px;
+  }
+  .layui-slider-wrap-btn {
+    background: transparent;
+    border: 0!important;
+    background: url("../assets/img/switch_btn.png") no-repeat;
+    background-size: 30px 30px;
+    width: 30px;
+    height: 30px;
+  }
+  & ~.slider-tips {
+    color: #7e90bb;
+    margin: 13px 15px;
+  }
+}
+
+.layui-input-inline {
+  margin-right: 5px;
+  .layui-input, .layui-textarea{
+    background: transparent;
+  }
+  .layui-input, .layui-select {
+    border-color: rgba(255, 255, 255, 0.6);
+    color: white;
+    height: 32px;
+    line-height: 32px;
+  }
+  .layui-input::placeholder{
+    color: rgba(255, 255, 255, 0.6)
+  }
+}
+
+.layui-form {
+  .layui-form-label {
+    width: 100px;
+  }
+  .layui-form-radio > i:hover, .layui-form-radioed > i {
+    color: #2b94fc;
+  }
+}

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>系统设置</title>
+  <link rel="stylesheet" href="../resources/layui/css/layui.css">
+  <script src="../resources/layui/layui.js"></script>
+  <script src="../resources/js/jquery-1.8.0.min.js"></script>
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+  <div class="layui-header">
+    <div class="layui-logo">系统设置</div>
+    <ul class="layui-nav layui-layout-left" lay-filter="head">
+      <li class="layui-nav-item"><a href="javascript:void(0);" id="equipment">设备管理</a></li>
+      <li class="layui-nav-item"><a href="javascript:void(0);" id="data">数据中心</a></li>
+      <li class="layui-nav-item"><a href="javascript:void(0);" id="pig">猪只管理</a></li>
+      <li class="layui-nav-item"><a href="javascript:void(0);" id="accountant">企业信息管理</a></li>
+    </ul>
+    <ul class="layui-nav layui-layout-right">
+      <li class="layui-nav-item">
+        <a href="javascript:;" id="user_name">
+          <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+        </a>
+      </li>
+      <li class="layui-nav-item"><a href="javascript:;" id="level"></a></li>
+      <li class="layui-nav-item"><a href="../System/main">返回主页</a></li>
+    </ul>
+  </div>
+  
+  <div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <ul class="layui-nav layui-nav-tree" id="sideBar" lay-filter="side">
+        
+      </ul>
+    </div>
+</div>
+
+<div class="layui-body" >
+    <!-- 内容主体区域 -->
+    <div class="layui-tab" lay-allowClose="true" lay-filter="tab-page" >
+      <ul class="layui-tab-title"></ul>
+      <div class="layui-tab-content" ></div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../resources/js/sideBarData.js" charset="UTF-8"></script>
+<script type="text/javascript">
+	var company_id = localStorage.getItem("company_id");
+	var equipment = {};
+	var title = {};
+	var power = {
+	        id : 'powerSet',
+	        icon : 'layui-icon-template',
+	        title : '权限分配',
+	        dataurl : "../System/powerSet?user_name="+user_name
+	      };
+	if(group_id == 1){
+		account[1].children.push(power);
+	} 
+  //tab元素链表
+  function Node(v){
+    this.value = v;
+    this.next = null;
+  }
+  function LinkedList(){
+    this.head = new Node(null);
+    this.tail = this.head;
+    //在尾部添加新节点
+    this.append = function(v){
+      node = new Node(v);
+      this.tail.next = node;
+      this.tail = node;
+    }
+    //根据值查找某个节点
+    this.find = function(v){
+      var curNode = this.head;
+      while(curNode != null){
+        if(curNode.value == v){
+          break;
+        }
+        curNode = curNode.next;
+      }
+      return curNode;
+    }
+    //删除某个指定内容节点
+    this.delete = function(v){
+      //找到该节点的前一个节点
+      var curNode = this.head;
+      while(curNode.next != null){
+        if(curNode.next.value == v){
+          break;
+        }else{
+          curNode = curNode.next;
+        }
+      }
+      var node1 = curNode.next;
+      console.log(node1);
+      //删除节点
+      curNode.next = curNode.next.next;
+    }
+    //删除指定位置的节点
+    this.deleteAt = function(index){
+      //找出要删除节点的前一个节点
+      var last = this.head;
+      for(var i = 0; i < index; i++){
+        last = last.next;
+      }
+      //删除节点
+      last.next = last.next.next;
+      if(last.next == null){
+        this.tail = last;
+      }
+    }
+    //打印链表
+    this.print = function(){
+      var list = '';
+      var curNode = this.head;
+      while(curNode != null){
+        list += curNode.value+"->";
+        curNode = curNode.next;
+      }
+      list+='null';
+      console.log(list);
+    }
+  }
+
+  //存放菜单数据的链表
+  var array = new LinkedList();
+  $(function(){	  
+	$.ajax({
+		url:'../Equipment/myequip',
+        data: {'company_id':company_id},
+        contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+        type:'POST',
+        dataType: 'json',
+        success:function(data){
+        	console.log(data)
+        	equipment = data.content;
+        	title = data.title;
+        	localStorage.setItem("equipmentOfType",JSON.stringify(equipment));
+        	localStorage.setItem("titleOfType",JSON.stringify(title));
+        	//设备信息列表
+        	var equip_children_list = [];
+        	for(var key in title){
+        		var temp = {};
+        		temp.title = title[key];
+        		temp.dataurl = '../System/equipments?type='+key,
+        		temp.icon = 'layui-icon-component';
+        		temp.id = key;
+        		equip_children_list.push(temp);
+        	}
+        	//设备组成信息
+        	var component_children_list = [];
+        	for(var key in title){
+        		var temp = {};
+        		temp.title = title[key]+'元件';
+        		temp.dataurl = '../System/component?type='+key,
+        		temp.icon = 'layui-icon-component';
+        		temp.id = key+'_component';
+        		component_children_list.push(temp);
+        	}
+        	//数据中心信息列表
+        	var data_children_list = [];
+        	for(var key in title){
+        		var temp = {};
+        		temp.title = title[key]+"数据";
+        		temp.dataurl = '../System/data_list?type='+key,
+        		temp.icon = 'layui-icon-component';
+        		temp.id = key+'_data';
+        		data_children_list.push(temp);
+        	}
+        	data_center[0].children = data_children_list;
+        	equipments[0].children = equip_children_list;
+        	equipments[1].children = component_children_list;
+        	console.log(equipments);
+        }
+	});
+  })
+  //layui区域
+  layui.use('element', function(){
+    var element = layui.element;
+    //生成头菜单
+    element.on('nav(head)',function(elem){
+      var id = elem[0].id;
+      //判断是什么系统，生成相应侧栏菜单
+      createSideBar(id);
+      element.init();
+    });
+    
+    //点击侧栏菜单生成tab
+    element.on('nav(side)',function(elem){
+      addTab(elem[0]);
+
+    })
+
+    //tab删除监听
+    element.on('tabDelete(tab-page)',function(data){
+      array.deleteAt(data.index);
+      console.log(data.index);
+      array.print();
+    })
+    //调整嵌套窗口的高度自适应
+    function FrameWH() {
+            var h = $(window).height()-190;
+            $("iframe").css("height",h+"px");
+        }
+ 
+    $(window).resize(function () {
+        FrameWH();
+    });
+
+  //添加新tab
+  function addTab(tab){
+    var id = tab.id;
+    //判断tab是否存在或者是否可以点开
+    if(tab.url != null && array.find(id) == null){
+      array.append(id);
+      element.tabAdd('tab-page',{
+        title : tab.innerText,
+        content :  '<iframe src="'+tab.url+'" frameborder="0" name="content" width="100%" ></iframe>',
+        id : id
+      })
+      FrameWH();
+      array.print();
+    }
+    element.tabChange('tab-page',id);
+  }
+  });
+
+//根据目录横向导航栏生成侧栏菜单        
+function createSideBar(id){
+  //先删除原有的li节点
+  var sideBar = document.getElementById('sideBar');
+  var children = sideBar.childNodes;
+  console.log(children);
+  for(var i = children.length - 1; i >= 0; i--){
+    sideBar.removeChild(children[i]);
+  }
+    if(id == 'equipment'){
+      createBar(equipments);       
+    }else if(id == 'data'){
+    	createBar(data_center);       
+    }else if(id == 'pig'){ 
+    	createBar(pig); 
+    }else if(id == 'accountant'){
+      createBar(account);
+    }
+}
+
+//创建侧栏菜单
+function createBar(data){
+  var sideBar = document.getElementById('sideBar');
+  for(var i = 0; i < data.length; i++){
+    var li = document.createElement('li');
+    li.className = "layui-nav-item";
+    var ii = document.createElement('i');
+    ii.className = 'layui-icon '+data[i].icon;
+    var a = document.createElement('a');
+    a.href = 'javascript:;';
+    a.appendChild(ii);
+    a.innerHTML+=(data[i].title);
+    li.appendChild(a);
+    if(data[i].children != null){
+      var dl = document.createElement('dl');
+      dl.className = "layui-nav-child";
+      for(var j = 0; j < data[i].children.length; j++){
+        var dd = document.createElement('dd');
+        var ii = document.createElement('i');
+        ii.className = 'layui-icon '+data[i].children[j].icon;
+        var a = document.createElement('a');
+        a.appendChild(ii);
+        a.innerHTML+=(data[i].children[j].title);
+        a.href = 'javascript:;';
+        a.url = data[i].children[j].dataurl;
+        a.id = data[i].children[j].id;
+        dd.appendChild(a);
+        dl.appendChild(dd);
+      }
+      li.appendChild(dl);
+    }
+    sideBar.appendChild(li);
+  }
+}
+</script>
+</html>

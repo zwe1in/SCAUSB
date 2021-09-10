@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>故障设备状态列表</title>
+        <script src="../resources/layui/layui.js"></script>
+        <script src="../resources/js/jquery-1.8.0.min.js"></script>
+        <link rel="stylesheet" href="../resources/layui/css/layui.css" media="all">
+    </head>
+
+    <body>
+        <fieldset style="width: 650px;">
+            <legend>设备统计</legend>
+            <table id="equipment_list" ></table>
+        </fieldset>
+    </body>
+
+    <script>
+    	var table_name = '${error_table}';
+//    	document.getElementByTagName('legend').innerText = text;
+        layui.use('table',function(){
+            var table = layui.table;
+            table.render({
+                elem: '#equipment_list',
+                height: 312,
+                url: '../Equipment/error_list?table_name='+table_name,
+                page: true,
+                limits: [10,20,50],
+                cols: [[ //表头
+                        {field: 'e_id', title: '设备编号', width:100, sort: true, fixed: 'left'}
+                        ,{field: 'name', title: '设备名称', width:100}
+                        ,{field: 'type', title: '设备类型', width:100,
+                        	templet: function(d){
+                        		return d.type=="perform"?"执行设备":"传感设备";
+                        	}}
+                        ,{field: 'status', title: '设备状态', width:100,
+                        	templet: function(d){
+                        		return d.status=="1"?"<span style='color:green;'>正常</span>":"<span style='color:red;'>异常</span>";
+                        	}}
+                        ,{field: 'time', title: '添加时间', width:250} 
+                        ]],
+                text:{
+                	none : '暂无'
+                }
+            })
+        })
+    </script>
+</html>

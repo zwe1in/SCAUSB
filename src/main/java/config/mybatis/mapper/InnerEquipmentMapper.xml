@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xumu.programmer.dao.InnerEquipmentDao">
+	<select id="getAllEquipment" parameterType="String" resultType="InnerEquipment" >
+		select * from ${table_name} 
+	</select>
+	
+	<select id="queryByNameWithTable" parameterType="String" resultType="InnerEquipment" >
+		select * from ${table_name} where name = #{name}
+	</select>
+	
+	<!-- 获取对应设备ID的设备子设备的数量 -->
+	<select id="getInnerCount" parameterType="String" resultType="Integer">
+		select count(*) from ${table_name}
+	</select>
+	
+	<!-- 获取故障设备数量 -->
+	<select id="getErrorCount" parameterType="String" resultType="Integer">
+		select count(*) from ${table_name} where status = 0
+	</select>
+	
+	<!-- 添加新设备 -->
+	<insert id="add" >
+		insert into ${table_name}(id,e_id,name,type,status) values(null,#{e_id},#{name},#{type},#{status})
+	</insert>
+	
+	<!-- 查找故障设备 -->
+	<select id="queryError_innerEquipment" parameterType="String" resultType="InnerEquipment" >
+		select * from ${table_name} where status = 0
+	</select>
+	
+	<!-- 元件开关 -->
+	<update id="switch_inner">
+		update ${table_name} set status = #{status} where id = #{id}
+	</update>
+</mapper>

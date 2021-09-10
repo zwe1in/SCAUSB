@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+<title>看板登录</title>
+<link rel="stylesheet" type="text/css" href="../resources/css/reset.css" />
+<link rel="stylesheet" type="text/css" href="../resources/css/scanboardLogin.css" />
+<link rel="stylesheet" type="text/css" href="../resources/css/animsition.css" />
+</head>
+<body>
+	<div class="wp animsition">
+		<div class="boardLogin">
+			<a href="#" class="logo">
+				<img src="../resources/images/images/loginLogo.png">
+			</a>
+			<form>
+				<div class="inpGroup">
+					<span class="loginIco1"></span>
+					<input type="text" id="user_name" name="user_name" placeholder="请输入您的用户名">
+				</div>
+				
+				<div class="inpGroup">
+					<span class="loginIco2"></span>
+					<input type="password" id="password" name="password" placeholder="请输入您的密码">
+				</div>
+				<div class="cpacha">
+					<div class="inpGroup">
+						<span class="loginIco2"></span>
+						<input type="text" id="cpacha" name="cpacha" placeholder="请输入验证码">
+					</div>
+					<img id="cpacha-img" title="点击切换验证码" style="cursor:pointer;" src="../System/get_cpacha?vl=4&w=150&h=40&type=loginCpacha" width="110px" height="30px" onclick="changeCpacha()">
+				</div>
+				
+				<!-- <button class="submit">登录</button> -->
+				<div class="login_btn">
+					<a href="#" class="submit">登录</a>
+					<a href="#" class="animsition-link success" style="display:none;"></a>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div id="particles-js"></div>
+</body>
+<script type="text/javascript" src="../resources/js/sw/jquery.min.js"></script>
+<script type="text/javascript" src="../resources/js/sw/jquery.animsition.js"></script>
+<script src="../resources/js/sw/particles.min.js"></script>
+<script src="../resources/js/sw/app.js"></script>
+<script type="text/javascript">
+	$(".animsition").animsition({
+	    inClass               :   'fade-in',
+	    outClass              :   'fade-out',
+	    inDuration            :    800,
+	    outDuration           :    1000,
+	    linkElement           :   '.animsition-link',
+
+	    loading               :    false,
+	    loadingParentElement  :   'body',
+	    loadingClass          :   'animsition-loading',
+	    unSupportCss          : [ 'animation-duration',
+	                              '-webkit-animation-duration',
+	                              '-o-animation-duration'
+	                            ],
+	
+
+	    overlay               :   false,
+	    
+	    overlayClass          :   'animsition-overlay-slide',
+	    overlayParentElement  :   'body'
+  	});
+	
+	//更换验证码
+	function changeCpacha(){
+		$("#cpacha-img").attr("src",'../System/get_cpacha?vl=4&w=150&h=40&type=loginCpacha&t=' + new Date().getTime());
+	}
+	
+	//登陆接口
+	$(".submit").click(function(){
+		var user_name = $("#user_name").val();
+		var password = $("#password").val();
+		var cpacha = $("#cpacha").val();
+		var page = '../System/main?user_name=';
+		var url = '../System/loginCheck';
+		if(user_name == '' || user_name == 'undefined'){
+			alert("请填写用户名！");
+			return;
+		}
+		if(password == '' || password == 'undefined'){
+			alert("请填写密码！");
+			return;
+		}
+		if(cpacha == '' || cpacha == 'undefined'){
+			alert("请填写验证码！");
+			return;
+		}
+		$.ajax({
+			url:url,
+			data:{user_name:user_name,password:password,cpacha:cpacha},
+			type:'post',
+			contentType: "application/x-www-form-urlencoded; charset=utf-8",
+			success:function(data){
+				if(data.success){
+					localStorage.setItem("user_name",user_name);
+					localStorage.setItem("group_id",data.group_id);
+					localStorage.setItem("company_id",data.company_id);
+					localStorage.setItem("authorization_code",data.authorization_code);
+					$(".success").attr("href",page+user_name);
+					$(".success").click();
+				}else{
+					alert(data.msg);
+					changeCpacha();
+				}
+			}
+		})
+	})
+
+</script>
+</html>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xumu.programmer.dao.BreedDao">
+	<select id="getLatestDataList" parameterType="String" resultType="java.util.HashMap">
+	    select n24,n25,n26,n27,n29,n44,n45,n48 from ${e_id} where ( datediff ( time , #{date} ) = 0 ) order by time desc limit 1
+	</select>
+	<select id="getAllData" parameterType="String" resultType="java.util.HashMap">
+	    select * from ${e_id} order by time desc limit 1
+	</select>
+	<select id="getFeedData" parameterType="String" resultType="java.util.HashMap">
+	    select n5,n6,n7,n8,n9,n10,n11,n12,n13,n14,n15,n16,n17,n18,n19,n20,n21,n22,n23,n47,n48,n49,n50,n51,n52,n60,n61,n62,n63,n64,n65,n66,n67,n68,n69,n70,n71,n72,n73,n74,n75,n76,n77 from ${e_id} where ( datediff ( time , #{date} ) = 0 ) order by time desc limit 1
+	</select>
+</mapper>

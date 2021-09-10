@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xumu.programmer.dao.PowerDao">
+	<!-- 查询某公司所有权限信息 -->
+	<select id="getAllData" parameterType="String" resultType="Power" >
+		select * from ${table_name} 
+	</select>
+	
+	<!-- 更新某项权限 -->
+	<update id="switch_power">
+		update ${table_name} set ${type} = #{status} where group_id = #{group_id}
+	</update>
+</mapper>

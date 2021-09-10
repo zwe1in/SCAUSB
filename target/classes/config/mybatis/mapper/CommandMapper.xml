@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xumu.programmer.dao.CommandDao">
+	
+	<!-- 查询所有数据和状态 -->
+	<select id="getDataAndStatus" resultType="java.util.HashMap">
+		select time,n0,n1,n2,n3,n4,n5,n41,n42,n43,n46,n20,n21,n22,n23,n24,n25,n26,n27,n28,n29,n30,n71,n72,n75,n76,n79 from ctrl order by time desc limit 1
+	</select>
+	
+	<!-- 更新某项 -->
+	<update id="setValue">
+		update ctrl set ${type} = #{value} where time = #{time}
+	</update>
+	
+	<!-- 更新设置 -->
+	<update id="setStatus">
+		update ctrl set ${type} = #{status} where time = #{time}
+	</update>
+</mapper>

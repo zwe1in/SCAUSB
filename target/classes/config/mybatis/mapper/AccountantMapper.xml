@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xumu.programmer.dao.AccountantDao">
+	<!-- 根据用户名查找用户所有信息 -->
+	<select id="queryAccountByUname" parameterType="String" resultType="Accountant">
+		select * from account where user_name = #{user_name}
+	</select>
+
+	<!-- 根据ID查找用户所有信息 -->
+	<select id="queryById" parameterType="Integer" resultType="Accountant">
+		select * from account where id = #{id}
+	</select>
+
+	<select id="queryAllStuff" resultType="Accountant">
+		select * from account where group_id &gt; #{group_id} and company_id = #{company_id}
+	</select>
+
+	<!-- 根据电话号码查找用户所有信息 -->
+	<select id="queryAccountByCode" parameterType="String" resultType="Accountant">
+		select * from account where authorization_code = #{authorization_code}
+	</select>
+	
+	<!-- 查询区域 -->
+	<select id="queryArea" parameterType="String" resultType="String">
+		select area from account where user_name = #{user_name}
+	</select>
+	
+	<!-- 查询市级 -->
+	<select id="queryTown" parameterType="String" resultType="String">
+		select town from account where user_name = #{user_name}
+	</select>
+
+	<!-- 查询舍（场）级 -->
+	<select id="queryHouse" parameterType="String" resultType="String">
+		select house from account where user_name = #{user_name}
+	</select>
+
+	<!-- 根据用户名查询密码 -->
+	<select id="queryPwdByUname" parameterType="String" resultType="String">
+		select password from account where user_name = #{user_name}
+	</select>
+	
+	<!-- 更新管理员个人信息 -->
+	<update id="update" parameterType="Accountant">
+		update account set sex = #{sex},phone = #{phone},address = #{address},email = #{email} where user_name = #{user_name}
+	</update>
+	
+	<!-- 更新员工个人信息 -->
+	<update id="updateStuff" parameterType="Accountant">
+		update account set user_name=#{user_name}, sex = #{sex},phone = #{phone},address = #{address},email = #{email} where id = #{id}
+	</update>
+	
+	<!-- 修改密码 -->
+	<update id="savePwd" parameterType="Accountant">
+		update account set password = #{password} where user_name = #{user_name}
+	</update>
+	
+	<!-- 增加用户 -->
+	<insert id="addStuff" parameterType="Accountant">
+		insert into account(id,company_id,user_name,authorization_code,password,sex,email,address,phone,group_id,birth) values(null,#{company_id},#{user_name},#{authorization_code},#{password},0,null,null,#{phone},#{group_id},null)
+	</insert>
+	
+	<!-- 更新消息推送 -->
+	<update id="messageUpdate">
+		update account set message=#{message} where id = #{id} and company_id = #{company_id}
+	</update>
+	
+	<!-- 更新权限 -->
+	<update id="levelUpdate" parameterType="Accountant">
+		update account set user_name = #{user_name},group_id=#{group_id},area=#{area},town=#{town},house=#{house} where id = #{id}
+	</update>
+	
+		<!-- 批量删除用户 -->
+	<delete id="deleteUsersById" parameterType="Integer[]">
+		delete from account 
+		<where>
+			id
+			<foreach collection="array" item="id" open="in (" close=")" separator=",">
+				#{id}
+			</foreach>
+		</where>
+	</delete>
+</mapper>

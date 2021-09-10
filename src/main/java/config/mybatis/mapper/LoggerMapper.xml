@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xumu.programmer.dao.LoggerDao">
+	<!-- 查询所有日志 -->
+	<select id="queryAllLog" resultType="Logger" >
+		select * from account_log 
+	</select>
+	
+	<!-- 增加日志 -->
+	<insert id="add" parameterType="Logger" >
+		insert into account_log (id,author,content,date) values(null,#{author},#{content},#{date})
+	</insert>
+	
+	<!-- 批量删除日志 -->
+	<delete id="delete" parameterType="Integer[]">
+		delete from account_log 
+		<where>
+			id
+			<foreach collection="array" item="id" open="in (" close=")" separator=",">
+				#{id}
+			</foreach>
+		</where>
+	</delete>
+</mapper>

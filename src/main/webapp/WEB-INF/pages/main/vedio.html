@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+        <title>智能猪只数据管理平台</title>
+        <link rel="stylesheet" href="../resources/css/vedio.css">
+        <link rel="stylesheet" href="../resources/layui/css/layui.css" media="all">
+        <script src="../resources/js/ezuikit.js"></script>
+        <script src="../resources/layui/layui.js"></script>
+        <script src="../resources/js/jquery-1.8.0.min.js"></script>
+        <script src="../resources/js/echarts.min.js"></script>
+    </head>
+
+    <body onload="startTime()">
+        <header>
+            <div id="current_page">视频监控系统</div>
+            智能猪只数据管理平台
+            <div class="alarm"> <a onclick="alarm()" href="javascript:void(0);"><img src="../resources/images/notification.png"></a></div>
+            <div class="warn"> <a onclick="warn()" href="javascript:void(0);"><img src="../resources/images/caution.png" alt=""></a></div>
+            <div id="cur_time"></div>
+        </header>
+
+        <div id="content">
+            <div id="sidebar" >
+                <!-- 侧栏菜单-->
+                <ul class="side_menu">
+			<li>
+                <a href="index.html" class="bttn" id="main">
+                	<img src="../resources/images/list.png" alt="">
+                </a>
+               	<div class="tips" id="tips_main">综合展示</div>
+            </li>
+           <li class="vedio" style="background-color: rgb(1, 1, 59);">
+                        <img src="../resources/images/vedio.png" alt="">
+           </li>
+           <li class="accountant">
+                 <a href="accountant.html" class="bttn" id="accountant">
+                    <img src="../resources/images/set.png" alt="">
+                 </a>
+                 <div class="tips" id="tips_accountant">用户管理</div>
+           </li>
+                </ul>
+            </div>
+
+            <div id="content_main" class="container" >
+                <!-- 日历和设备-->
+                <div class="content_left">
+                    <div class="calendar">
+                        <div id="title"> <img src="../resources/images/icon06.png" /> 日 历</div>
+                        <div id="inner_calendar"></div>
+                    </div>
+                    <div class="equipment">
+                        <div id="title"><img src="../resources/images/icon01.png" /> 设备分布情况</div>
+                        <div id="equipment_online" style="width: 320px; height: 300px;"></div>
+                    </div>
+                </div>
+                <div class="content_right">
+				<div id="content_player" class="layui-carousel">
+					<div carousel-item>
+						<!-- <div style="background-color:red">条目1</div>
+                            <div style="background-color:green">条目2</div>
+                            <div style="background-color:blue">条目3</div>
+                            <div style="background-color:mediumorchid">条目4</div>
+                            <div style="background-color:orange">条目5</div> -->
+						<div class="vedio_list ">
+							<div id="title">猪舍视频</div>
+							<div class="vedio">
+								<div class="vedio_component">
+									<video id="example_video_2" class="video-js vjs-default-skin"
+										controls preload="none" width="330px" height="280px" poster=""
+										data-setup="{}">
+										<source src="../resources/vedio/a1.mp4" type='video/mp4' />
+									</video>
+								</div>
+								<div class="vedio_component" style="width:200px; height:280px;">
+									<span>猪只信息</span>
+									<div id="v_id" class="tag">视频ID：G001</div>
+									<div id="name" class="tag">猪舍编号：01</div>
+									<div id="count" class="tag">猪只数量：03</div>
+									<div id="pig" class="tag">猪只情况：良好</div>
+								</div>
+							</div>
+							<div class="vedio">
+								<div class="vedio_component">
+									<video id="example_video_2" class="video-js vjs-default-skin"
+										controls preload="none" width="330px" height="280px" poster=""
+										data-setup="{}">
+										<source src="../resources/vedio/a2.mp4" type='video/mp4' />
+									</video>
+								</div>
+								<div class="vedio_component" style="width:200px; height:280px;">
+									<span>猪只信息</span>
+									<div id="v_id" class="tag">视频ID：G002</div>
+									<div id="name" class="tag">猪舍编号：02</div>
+									<div id="count" class="tag">猪只数量：04</div>
+									<div id="pig" class="tag">猪只情况：良好</div>
+								</div>
+							</div>
+							<div class="vedio">
+								<div class="vedio_component">
+									<video id="example_video_2" class="video-js vjs-default-skin"
+										controls preload="none" width="330px" height="280px" poster=""
+										data-setup="{}">
+										<source src="../resources/vedio/a3.mp4" type='video/mp4' />
+									</video>
+								</div>
+								<div class="vedio_component" style="width:200px; height:280px;">
+									<span>猪只信息</span>
+									<div id="v_id" class="tag">视频ID：G003</div>
+									<div id="name" class="tag">猪舍编号：03</div>
+									<div id="count" class="tag">猪只数量：03</div>
+									<div id="pig" class="tag">猪只情况：良好</div>
+								</div>
+							</div>
+							<div class="vedio">
+								<div class="vedio_component">
+									<video id="example_video_2" class="video-js vjs-default-skin"
+										controls preload="none" width="330px" height="280px" poster=""
+										data-setup="{}">
+										<source src="../resources/vedio/a4.mp4" type='video/mp4' />
+									</video>
+								</div>
+								<div class="vedio_component" style="width:200px; height:280px;">
+									<span>猪只信息</span>
+									<div id="v_id" class="tag">视频ID：G004</div>
+									<div id="name" class="tag">猪舍编号：04</div>
+									<div id="count" class="tag">猪只数量：08</div>
+									<div id="pig" class="tag">猪只情况：良好</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="vedio_list">
+							<div id="title">猪舍视频</div>
+							<div class="vedio">
+								<div class="vedio_component">
+									<video id="example_video_2" class="video-js vjs-default-skin"
+										controls preload="none" width="330px" height="280px" poster=""
+										data-setup="{}">
+										<source src="../resources/vedio/a5.mp4" type='video/mp4' />
+									</video>
+								</div>
+								<div class="vedio_component" style="width:200px; height:280px;">
+									<span>猪只信息</span>
+									<div id="v_id" class="tag">视频ID：G005</div>
+									<div id="name" class="tag">猪舍编号：05</div>
+									<div id="count" class="tag">猪只数量：01</div>
+									<div id="pig" class="tag">猪只情况：良好</div>
+								</div>
+							</div>
+							<div class="vedio">
+								<div class="vedio_component">
+									<video id="example_video_2" class="video-js vjs-default-skin"
+										controls preload="none" width="330px" height="280px" poster=""
+										data-setup="{}">
+										<source src="../resources/vedio/a6.mp4" type='video/mp4' />
+									</video>
+								</div>
+								<div class="vedio_component" style="width:200px; height:280px;">
+									<span>猪只信息</span>
+									<div id="v_id" class="tag">视频ID：G006</div>
+									<div id="name" class="tag">猪舍编号：06</div>
+									<div id="count" class="tag">猪舍数量：06</div>
+									<div id="pig" class="tag">猪只情况：良好</div>
+								</div>
+							</div>
+							<div class="vedio"></div>
+							<div class="vedio"></div>
+						</div>
+
+						<div class="vedio_list">
+							<div id="title">猪舍直播</div>
+							<div class="vedio">
+								<div class="vedio_component" >
+									<iframe src="" 
+									width="330" 
+									height="280" 
+									id="C91064628" 
+									allowfullscreen>
+									</iframe>
+								</div>
+								<div class="vedio_component" style="width:200px; height:280px;">
+									<span>猪只信息</span>
+									<div id="v_id" class="tag">直播ID：P001</div>
+									<div id="name" class="tag">猪舍编号：01</div>
+									<div id="count" class="tag">猪只数量：04</div>
+									<div id="pig" class="tag">猪只情况：良好</div>
+								</div>
+							</div>
+							<div class="vedio">
+								<div class="vedio_component" >
+									<iframe src="" 
+									width="330" 
+									height="280" 
+									id="C91064634" 
+									allowfullscreen></iframe>
+								</div>
+								<div class="vedio_component" style="width:300px; height:280px;">
+									<span>猪只信息</span>
+									<div id="v_id" class="tag">直播ID：P002</div>
+									<div id="name" class="tag">猪舍编号：02</div>
+									<div id="count" class="tag">猪只数量：02</div>
+									<div id="pig" class="tag">猪只情况：良好</div>
+								</div>
+							</div>
+							<div class="vedio">
+								<div class="vedio_component" >
+									<iframe src="" 
+									width="330" 
+									height="280" 
+									id="C91064643" 
+									allowfullscreen></iframe>
+								</div>
+								<div class="vedio_component" style="width:200px; height:280px;">
+									<span>猪只信息</span>
+									<div id="v_id" class="tag">直播ID：G003</div>
+									<div id="name" class="tag">猪舍编号：03</div>
+									<div id="count" class="tag">猪只数量：04</div>
+									<div id="pig" class="tag">猪只情况：良好</div>
+								</div>
+							</div>
+							<div class="vedio"></div>
+							<script>
+								//获取token
+								var vedios = ['C91064628','C91064634','C91064643'];
+								$.ajax({
+									url:'https://open.ys7.com/api/lapp/token/get',
+							        data: {'appKey':'415b44a479674ece9daeaf2333037f06','appSecret':'a90e813df819f721ff42a8d11cbff18d'},
+							        contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+							        type:'POST',
+							        dataType: 'json',
+							        success:function(data){
+							        	var token = data.data.accessToken;
+							        	console.log(token);
+							        	for(var i = 0; i < vedios.length; i++){
+							        		var url = 'https://open.ys7.com/ezopen/h5/iframe_se?url=ezopen://open.ys7.com/'+vedios[i]+'/1.live&autoplay=0&accessToken='+token+'&templete=2';
+							        		console.log(url);
+							        		document.getElementById(vedios[i]).src = url;
+							        	}
+							        }
+								})
+							</script>
+						</div>
+					</div>
+				</div>
+			</div>
+            </div>
+        </div>
+    </body>
+
+
+
+<script>
+    function startTime(){
+        var week=["日","一","二","三","四","五","六"];
+        var today=new Date();
+        var h=today.getHours();
+        var m=today.getMinutes();
+        var s=today.getSeconds();// 在小于10的数字钱前加一个‘0’
+        var day=today.getDay();
+        m=checkTime(m);
+        s=checkTime(s);
+        document.getElementById('cur_time').innerHTML="星期"+week[day]+" "+h+":"+m+":"+s;
+        t=setTimeout(function(){startTime()},500);
+    }
+    function checkTime(i){
+        if (i<10){
+            i="0" + i;
+        }
+        return i;
+    }
+
+    layui.use('laydate',function(){
+        var laydate = layui.laydate;
+        laydate.render({
+            elem: '#inner_calendar',
+            position: 'static',
+            theme: '#393D49'
+        });
+    });
+
+    layui.use('carousel',function(){
+        var carousel = layui.carousel;
+        carousel.render({
+            elem: '#content_player',
+            width: '1350px',
+            height: '810px',
+            arrow: 'always',
+            anim: 'default',
+            autoplay: false
+        })
+    });
+    
+    //生成侧栏菜单
+	function getsideBar(json) {
+		for ( var key in json) {
+			var li = document.createElement("li");
+			var a = document.createElement("a");
+			a.setAttribute("href", "system.html?type=" + key);
+			a.className = "bttn";
+			a.id = key;
+			var img = document.createElement("img");
+			img.src = "../resources/images/" + key + ".png";
+			img.alt = "";
+			var div = document.createElement("div");
+			div.className = "tips";
+			div.id = "tips_" + key;
+			div.innerText = json[key];
+			a.appendChild(img);
+			li.appendChild(a);
+			li.appendChild(div);
+			document.getElementsByClassName("side_menu")[0].appendChild(li);
+		}
+		var li = document.createElement("li");
+		var a = document.createElement("a");
+		a.setAttribute("href", "main.html");
+		a.className = "bttn";
+		a.id = "back";
+		var img = document.createElement("img");
+		img.src = "../resources/images/index.png";
+		img.alt = "";
+		var div = document.createElement("div");
+		div.className = "tips";
+		div.id = "tips_back";
+		div.innerText = "返回主页";
+		a.appendChild(img);
+		li.appendChild(a);
+		li.appendChild(div);
+		document.getElementsByClassName("side_menu")[0].appendChild(li);
+	}
+
+		var equipments = JSON.parse(localStorage.getItem("equipments"));
+		//生成分页条
+		getsideBar(equipments.title);
+
+	//摄像头设备分布情况
+	var equipment = echarts.init(document.getElementById('equipment_online'));
+	option = {
+		legend : {
+			orient : 'horizontal',
+			x : 'left',
+			y : 'bottom',
+			padding : [ 50, 0, 0, 0 ],
+			fontSize : 15,
+			data : [ {
+				name : '哺乳舍',
+				textStyle : {
+					color : 'red',
+					fontSize : 15
+				}
+			}, {
+				name : '育肥舍',
+				textStyle : {
+					color : 'yellow',
+					fontSize : 15
+				}
+			}, {
+				name : '妊娠舍',
+				textStyle : {
+					color : 'green',
+					fontSize : 15
+				}
+			}, {
+				name : '保育舍',
+				textStyle : {
+					color : 'orange',
+					fontSize : 15
+				}
+			}, {
+				name : '后备舍',
+				textStyle : {
+					color : 'purple',
+					fontSize : 15
+				}
+			} ]
+		},
+		tooltip : {
+			trigger : 'item',
+			formatter : '{a} <br/>{b} : {c} ({d}%)'
+		},
+		color : [ 'red', 'yellow', 'green', 'orange', 'purple' ],
+		series : [ {
+			name : '设备类型',
+			type : 'pie',
+			radius : '55%',
+			data : [ {
+				value : 13,
+				name : '哺乳舍'
+			}, {
+				value : 24,
+				name : '育肥舍'
+			}, {
+				value : 30,
+				name : '保育舍'
+			}, {
+				value : 33,
+				name : '后备舍'
+			}, {
+				value : 40,
+				name : '妊娠舍'
+			} ],
+			radius : [ '20%', '60%' ]
+		} ],
+		roseType : 'angle'
+	};
+
+	equipment.setOption(option);
+</script>
+<script type="text/javascript" src="../resources/js/button.js"></script>
+</html>

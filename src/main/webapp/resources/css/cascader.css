@@ -1,0 +1,144 @@
+.cascaderbox .hid {
+  visibility: hidden;
+}
+
+.cascaderbox {
+  width: 85%;
+  height: 36px;
+  position: absolute;
+  line-height: 35px;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  padding: 0 18px;
+  background: rgba(0,222,255,0.2);
+  border-radius: 18px;
+}
+
+.cascaderbox .inputbox {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+}
+
+.cascaderbox .searchtxt {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 85%;
+  height: 100%;
+  border: 0 none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #00ddfe; opacity:1; 
+}
+
+.cascaderbox input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  color: #00ddfe; opacity:1; 
+}
+
+.cascaderbox input::-moz-placeholder { /* Mozilla Firefox 19+ */
+  color: #00ddfe; opacity:1; 
+}
+
+.cascaderbox input:-ms-input-placeholder{
+  color: #00ddfe; opacity:1; 
+}
+
+.cascaderbox input::-webkit-input-placeholder{
+  color: #00ddfe; opacity:1; 
+}
+
+.cascaderbox .arrdown {
+  position: absolute;
+  right: 0px;
+  top: 16px;
+  display: inline-block;
+  width: 7px;
+  height: 4px;
+  background: url(../images/images/images/s_ico2.png) left top no-repeat;
+}
+
+.cascaderbox.open .arrdown {
+  transform: rotate(180deg);
+}
+
+.cascaderbox .dlist {
+  position: absolute;
+  left: 0;
+  top: 48px;
+  white-space: nowrap;
+  background-color: #fff;
+  border: 1px solid #e4e7ed;
+  height: 300px;
+  overflow: hidden;
+  z-index: 999;
+  border-radius: 10px;
+}
+
+.cascaderbox .dlist_ul {
+  min-width: 160px;
+  display: inline-block;
+  border-right: 1px solid #e4e7ed;
+  padding: 0 10px;
+  height: 300px;
+  overflow: auto;
+}
+
+.cascaderbox .dlist_ul:last-child {
+  border-right: 0 none;
+}
+
+.cascaderbox .citem,
+.cascaderbox .item2 {
+  padding: 5px 10px;
+  background: url('../images/images/ld_dr.png') right 16px no-repeat;
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.cascaderbox .dlist_search .item2 {
+  background: none;
+  max-width: 350px;
+}
+
+.cascaderbox .citem:hover,
+.cascaderbox .citem.on {
+  color: #409EFF;
+}
+
+.cascaderbox .citem.lastchild {
+  background: 0 none;
+}
+
+.cascaderbox .labelshow {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 90%;
+  display: inline-block;
+  height: 100%;
+  color: #00ddfe; 
+  opacity:1; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cascaderbox .searchdlist,
+.cascaderbox .searchdlist .dlist_ul {
+  height: auto;
+  max-height: 300px;
+}
+
+.cascaderbox .labelshow.hid {
+  display: none;
+}
+
+.cascaderbox .nosearch {
+  color: #c0c4cc;
+  height: 30px;
+}

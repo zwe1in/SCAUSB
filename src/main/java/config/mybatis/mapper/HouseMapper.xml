@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xumu.programmer.dao.HouseDao">
+	<!-- 查询所有猪舍 -->
+	<select id="queryAllHouse" parameterType="String" resultType="House">
+		SELECT * FROM ${table_name}
+	</select>
+	
+	<!-- 查询区域级猪舍 -->
+	<select id="queryAreaHouse" parameterType="String" resultType="House">
+		SELECT * FROM ${table_name} where area = #{area}
+	</select>
+	
+	<!-- 查询市级猪舍 -->
+	<select id="queryTownHouse" parameterType="String" resultType="House">
+		SELECT * FROM ${table_name} where area = #{area} and town = #{town}
+	</select>
+	
+	<!-- 查询舍级猪舍 -->
+	<select id="queryHouse" parameterType="String" resultType="House">
+		SELECT * FROM ${table_name} where name = #{house}
+	</select>
+	
+	<!-- 加入新舍 -->
+	<insert id="addHouse" >
+		insert into ${table_name}(name,type,table_name,principal,phone,area,town) values(#{house.name},#{house.type},#{house.table_name},#{house.principal},#{house.phone},#{house.area},#{house.town})
+	</insert>
+	
+	<!-- 查看某种舍的数量 -->
+	<select id="getHouseCount" resultType="Integer">
+		select count(*) from ${table_name} where type = #{type}
+	</select>
+	
+	<!-- 查看某个猪舍名是否存在 -->
+	<select id="isHouseExist" resultType="Integer">
+		select count(*) from ${table_name} where name = #{name}
+	</select>
+	
+	<!-- 删除猪舍 -->
+	<delete id="deleteHouse" parameterType="String">
+		delete from ${table_name} where table_name = #{house_name}
+	</delete>
+	
+	<!-- 删除猪舍的表 -->
+	<update id="deleteHouseTable" parameterType="String">
+		drop table ${house_name}
+	</update>
+	
+	<!-- 创建新的猪舍的数据表 -->
+	<update id="addHouseTable" parameterType="String">  
+		CREATE TABLE ${table_name} (
+		  `unit` varchar(30) DEFAULT NULL COMMENT '猪舍单元',
+		  `type` varchar(30) DEFAULT NULL COMMENT '单元猪舍类型',
+		  `equip_count` int(11) DEFAULT NULL COMMENT '单元设备数量',
+		  `equip_list` varchar(80) DEFAULT NULL COMMENT '单元设备名称列表',
+		  `principal` varchar(50) DEFAULT NULL COMMENT '负责人',
+		  `phone` varchar(30) DEFAULT NULL COMMENT '负责人电话'
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    </update> 
+    
+    <!-- 查询猪舍单元 -->
+    <select id="queryAllUnitByHouse_name" parameterType="String" resultType="Unit">
+    	select * from ${house_name}
+    </select>
+    
+    <!-- 根据单元名查询某个单元的信息 -->
+    <select id="queryUnitByName" parameterType="String" resultType="Unit">
+    	select * from ${house_name} where unit = #{unit}
+    </select>
+    
+    
+    <!-- 根据单元名查询某个猪舍的信息 -->
+    <select id="queryHouseByName" parameterType="String" resultType="House">
+    	select * from ${table_name} where name = #{name}
+    </select>
+    
+    <!-- 查看某个单元名是否存在 -->
+	<select id="isUnitExist" resultType="Integer">
+		select count(*) from ${house_name} where unit = #{unit}
+	</select>
+	
+	<!-- 加入新单元 -->
+	<insert id="addUnit" >
+		insert into ${house_name}(unit,type,equip_count,equip_list,principal,phone) values(#{unit.unit},#{unit.type},null,null,#{unit.principal},#{unit.phone})
+	</insert>
+	
+	<!-- 更新单元信息 -->
+	<update id="unitUpdate" >
+		update ${house_name} set unit = #{unit.unit},type=#{unit.type},principal = #{unit.principal},phone = #{unit.phone} where unit = #{init_unit}
+	</update>
+	
+	<!-- 添加猪舍设备 -->
+	<update id="equipAdd" >
+		update ${house_name} set equip_count = #{unit.equip_count},equip_list=#{unit.equip_list} where unit = #{unit.unit}
+	</update>
+	
+	<!-- 删除猪舍单元设备 -->
+	<update id="equipDelete" >
+		update ${house_name} set equip_count = #{unit.equip_count},equip_list=#{unit.equip_list} where unit = #{unit.unit}
+	</update>
+	
+	<!-- 删除单元 -->
+	<delete id="deleteUnit" parameterType="String" >
+		delete from ${house_name} where unit = #{unit}
+	</delete>
+	
+</mapper>

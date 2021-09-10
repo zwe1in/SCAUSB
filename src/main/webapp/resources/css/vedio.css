@@ -1,0 +1,211 @@
+body {
+	/* background: url(../images/dash_bg.png) no-repeat;
+    background-size: 120% 120%; */
+	background-color: #0b122e;
+	color: #ffffff;
+}
+
+header {
+	width: 100%;
+	height: 90px;
+	background: url(../images/bg_top.png) center no-repeat;
+	color: #fafad2;
+	text-align: center;
+	font-size: 36px;
+	line-height: 90px;
+	margin: 0 auto;
+}
+
+header #current_page {
+	float: left;
+	position: absolute;
+	font-size: 25px;
+	color: aqua;
+	font-weight: bold;
+}
+
+.alarm {
+	position: absolute;
+	right: 200px;
+	top: -10px;
+}
+
+.warn {
+	position: absolute;
+	right: 265px;
+	top: -10px;
+}
+
+#cur_time {
+	right: 0px;
+	top: 0px;
+	position: absolute;
+	text-align: center;
+	font-size: 0.7em;
+	font-family: "微软雅体";
+	color: beige;
+}
+
+.tips {
+	display: none;
+	width: 70px;
+	height: 30px;
+	border-radius: 10px;
+	padding: 20px;
+	position: absolute;
+	background-color: #2F4056;
+	color: #ffffff;
+}
+
+#sidebar {
+	width: 100px;
+	height: 100%;
+	float: left;
+	background: rgba(0, 0, 0, 0.3);
+	margin: 0px 5px 0px 0px;
+	position: absolute;
+}
+
+ul {
+	width: 100%;
+	height: 100%;
+	float: left;
+	background: rgba(0, 0, 0, 0.3);
+	margin: 0px;
+	padding-left: 0px;
+}
+
+.side_menu {
+	float: left;
+}
+
+.side_menu li {
+	height: 100px;
+	text-align: center;
+	color: #636363;
+	font-size: 16px;
+	list-style: none;
+	padding-top: 20px;
+}
+
+.side_menu a {
+	text-decoration: none;
+}
+
+.side_menu li:hover {
+	background-color: rgb(1, 1, 59);
+}
+
+#content_main {
+	float: left;
+	width: 1750px;
+	height: 100%;
+	margin: 0px 0px 0px 110px;
+}
+
+.content_left {
+	width: 300px;
+	height: 100%;
+	float: left;
+	font-weight: bold;
+	font-family: "微软雅体";
+	font-size: 20px;
+	color: aqua;
+	text-align: center;
+	margin: 5px 10px 0px 0px;
+}
+
+.content_left .calendar {
+	width: 320px;
+	height: 400px;
+	float: left;
+	background: url(../images/bg_data.png) no-repeat;
+	background-size: 100% 100%;
+	margin-bottom: 5px;
+}
+
+#inner_calendar {
+	width: 320px;
+	padding: 10px 20px 0px 0px;
+}
+
+.content_left .equipment {
+	width: 320px;
+	height: 405px;
+	float: left;
+	background: url(../images/hangye.png) no-repeat;
+	background-size: 100% 100%;
+	margin-top: 5px;
+}
+
+.content_left #title {
+	width: 320px;
+	line-height: 55px;
+	background: url(../images/line.png) no-repeat bottom center;
+}
+
+.equipment #equipment_online {
+	width: 320px;
+	padding: 10px;
+}
+
+.content_right {
+	width: 1400px;
+	height: 100%;
+	float: left;
+	margin: 10px 0px 0px 20px;
+}
+
+.content_right .vedio_list {
+	background: url(../images/dash_bg.png) no-repeat;
+	background-color: rgb(1, 1, 59);
+	background-size: 100% 100%;
+}
+
+#content_player {
+	width: 1350px;
+	height: 810px;
+	background-color: rgb(1, 1, 59);
+}
+
+.vedio_list #title {
+	margin: 20px 0 0 630px;
+	font-size: 1.6em;
+	font-weight: bold;
+	color: #ffffff;
+}
+
+.vedio_list .vedio {
+	float: left;
+	width: 570px;
+	height: 300px;
+	background: url(../images/left_bg02.png) no-repeat;
+	background-size: 100% 100%;
+	margin: 20px 20px 20px 50px;
+	padding: 20px 0 0 15px
+}
+
+.vedio .vedio_component{
+	float : left;
+	font-family: "微软雅体";
+	margin-left : 5px;
+	font-size: 20px;
+	color : yellow;
+}
+
+.tag {
+	text-align: left;
+	font-size: 25px;
+	font-family: "微软雅体";
+	width: 200px;
+	height: 50px;
+	/* border: 2px solid purple; */
+	color: aqua;
+	margin-top:20px;
+}
+
+@media screen and (max-width: 1600px) {
+  	html{
+		zoom : 0.8;
+	}
+}

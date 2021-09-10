@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>设备警告</title>
+        <script src="../resources/layui/layui.js"></script>
+        <script src="../resources/js/jquery-1.8.0.min.js"></script>
+        <link rel="stylesheet" href="../resources/layui/css/layui.css" media="all">
+    </head>
+
+    <body>
+        <fieldset style="width: 650px;">
+            <legend>环控设备异常统计</legend>
+            <table id="environment_list" ></table>
+        </fieldset>
+
+        <fieldset style="width: 650px;">
+            <legend>除臭设备异常统计</legend>
+            <table id="deodorization_list" ></table>
+        </fieldset>
+    </body>
+
+    <script>
+        layui.use('table',function(){
+            var table = layui.table;
+
+            table.render({
+                elem: '#environment_list',
+                height: 312,
+                data: [],
+                page: true,
+                limits: [10,20,50],
+                cols: [[ //表头
+                        {field: 'id', title: '猪舍', width:80, sort: true, fixed: 'left'}
+                        ,{field: 'username', title: '异常设备', width:100}
+                        ,{field: 'sex', title: '异常内容', width:300}
+                        ,{field: 'city', title: '报警时间', width:100} 
+                        ]],
+               text: {
+                     none: '暂无数据'
+               }
+            })
+
+            table.render({
+                elem: '#deodorization_list',
+                height: 312,
+                data: [],
+                page: true,
+                limits: [10,20,50],
+                cols: [[ //表头
+                        {field: 'id', title: '猪舍', width:80, sort: true, fixed: 'left'}
+                        ,{field: 'username', title: '异常设备', width:100}
+                        ,{field: 'sex', title: '异常内容', width:300}
+                        ,{field: 'city', title: '警报时间', width:100} 
+                        ]],
+                        text: {
+                        	none: '暂无数据'
+                        }
+            })
+        })
+    </script>
+</html>

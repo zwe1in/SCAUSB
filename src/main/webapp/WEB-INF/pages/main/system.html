@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<title>智能猪只数据管理平台</title>
+<link rel="stylesheet" href="../resources/css/style.css">
+<link rel="stylesheet"
+	href="../resources/layui/css/modules/laydate/default/laydate.css"
+	media="all">
+<script src="../resources/layui/layui.js"></script>
+<script src="../resources/js/jquery-1.8.0.min.js"></script>
+<script src="../resources/js/echarts.min.js"></script>
+<script src="../resources/js/vue.js"></script>
+</head>
+
+<body onload="startTime()">
+	<header>
+		<div id="current_page">精准饲喂系统</div>
+		智能猪只数据管理平台
+		<div class="air sw back_link">
+			<a href="../System/air"><img src="../resources/images/air.png"></a>
+		</div>
+		<div class="alarm">
+			<a onclick="alarm()" href="javascript:void(0);"><img
+				src="../resources/images/notification.png"></a>
+		</div>
+		<div class="warn">
+			<a onclick="warn()" href="javascript:void(0);"><img
+				src="../resources/images/caution.png" alt=""></a>
+		</div>
+		<div id="cur_time"></div>
+	</header>
+
+	<div id="content">
+		<div id="sidebar">
+			<!-- 侧栏菜单-->
+			<ul class="side_menu">
+				<li><a href="index.html" class="bttn" id="main"> <img
+						src="../resources/images/list.png" alt="">
+				</a>
+					<div class="tips" id="tips_main">综合展示</div></li>
+				<li class="vedio"><a href="vedio.html" class="bttn" id="vedio">
+						<img src="../resources/images/vedio.png" alt="">
+				</a>
+					<div class="tips" id="tips_vedio">视频监控</div></li>
+				<li class="accountant"><a href="accountant.html" class="bttn"
+					id="accountant"> <img src="../resources/images/set.png" alt="">
+				</a>
+					<div class="tips" id="tips_accountant">用户管理</div></li>
+			</ul>
+		</div>
+
+		<div id="content_main" class="container">
+			<!-- 日历和设备-->
+			<div class="content_left">
+				<div class="calendar">
+					<div id="title">
+						<img src="../resources/images/icon06.png" /> 日 历
+					</div>
+					<div id="inner_calendar"></div>
+				</div>
+				<div class="equipment">
+					<div id="title">
+						<img src="../resources/images/icon01.png" /> 设备在线情况
+					</div>
+					<div id="equipment_online" style="width: 320px; height: 300px;"></div>
+				</div>
+			</div>
+			<div class="content_center">
+				<div class="map">
+					<div id="title">
+						<img src="../resources/images/icon02.png"> 设备分布情况
+					</div>
+					<div id="map" style="width: 700px; height: 350px;"></div>
+				</div>
+				<div class="list">
+					<div id="title">
+						<img src="../resources/images/icon03.png" /> 设备列表
+					</div>
+					<table id="equipment_list">
+						<thead id="list_head">
+							<tr>
+								<th>设备ID</th>
+								<th>主节点</th>
+								<th>从节点</th>
+								<th>经度</th>
+								<th>纬度</th>
+								<th>添加时间</th>
+							</tr>
+						</thead>
+						<tbody id="list_body"></tbody>
+					</table>
+					<div class="row">
+						<div class="col-md-5"></div>
+						<div class="col-md-7" id="pageCount"></div>
+					</div>
+				</div>
+			</div>
+			<div class="content_right">
+				<div class="equipment_manager">
+					<div id="title">
+						<img src="../resources/images/icon05.png" /> 设备元件管理
+					</div>
+					<div id="equipment_count" style="width: 550px; height: 350px;"></div>
+					<div id="tip">
+						<select id="inner_equip"></select> <select id="equ_type"></select>
+						<div id="warning" style="width: 120px; height: 120px;">
+							警告指标
+							<div id="warn_count" class="count">10条</div>
+						</div>
+						<div id="error" style="width: 120px; height: 120px;">
+							故障指标
+							<div id="error_count" class="count">
+								<a href="javascript:void(0)" onclick="getError()"></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="environment_manager">
+					<div id="title">
+						<img src="../resources/images/icon04.png" /> 环境数据
+					</div>
+					<div id="select_head">
+						<a id="left" href="javascript:void(0)" style="width: 40px;"><img
+							id="img1" src="../resources/images/page_first.png"></a> <a
+							id="btn1" class="btn" href="javascript:void(0)"
+							style="background-color: rgb(1, 1, 59);"></a> <a id="btn2"
+							class="btn" href="javascript:void(0)"></a> <a id="btn3"
+							class="btn" href="javascript:void(0)"></a> <a id="btn4"
+							class="btn" href="javascript:void(0)"></a> <a id="btn5"
+							class="btn" href="javascript:void(0)"></a> <a id="btn6"
+							class="btn" href="javascript:void(0)"></a> <a id="right"
+							onclick="toRight()" href="javascript:void(0)"
+							style="width: 40px;"> <img id="img2"
+							src="../resources/images/arrow_right.png" alt="">
+						</a>
+					</div>
+					<div id="select_combo">
+						<label for="place">设备ID</label> <select id="place">
+
+						</select> <label for="date">日期选择</label> <input type="text"
+							class="layui-input" id="date">
+					</div>
+					<div id="environment_data" style="width: 700px; height: 280px;"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+
+<script type="text/javascript">
+		//生成时钟
+	    function startTime(){
+	        var week=["日","一","二","三","四","五","六"];
+	        var today=new Date();
+	        var h=today.getHours();
+	        var m=today.getMinutes();
+	        var s=today.getSeconds();// 在小于10的数字钱前加一个‘0’
+	        var day=today.getDay();
+	        m=checkTime(m);
+	        s=checkTime(s);
+	        document.getElementById('cur_time').innerHTML="星期"+week[day]+" "+h+":"+m+":"+s;
+	        t=setTimeout(function(){startTime()},500);
+	    }
+	    function checkTime(i){
+	        if (i<10){
+	            i="0" + i;
+	        }
+	        return i;
+	    }
+	    //生成日历
+	    layui.use('laydate',function(){
+	        var laydate = layui.laydate;
+	        laydate.render({
+	            elem: '#inner_calendar',
+	            position: 'static',
+	            theme: '#393D49'
+	        });
+	        
+	        laydate.render({
+	            elem: '#date',
+	            theme: '#393D49',
+	            done: function(value){
+	            	var ID = "btn"+(btnOn%6==0?6:btnOn%6);
+		    		document.getElementById(ID).click();
+	            }
+	        })	    
+	    });
+	    
+		var curPage =1;	//当前页数
+		var totalPage;	//总页数
+	    var type = '${type}';	//设备类型 ！！！！！
+	    var table_name = "";
+	    var table_names = [];	//列表类型	！！！！！
+	    var equipments;	//所购设备	！！！！！
+	    var dataType = [];	//测试指标类型
+	    var innerdata = [];	//指标类型对应数据库的key
+		var index = 0;	//绘图分页记录
+		var btnOn = 1;	//所按下按钮
+		var company_id;//用户id
+		var inner_data={};//内部执行设备数据
+	    $(function(){
+	    	//后台跳转链接
+	    	if(type == 'feed'){	    		
+	    		$('.back_link > a').attr('href','../System/sw');
+	    	}else{
+	    		$('.back_link > a').attr('href','../System/air');
+	    	}
+	    	company_id = localStorage.getItem("company_id");
+	    	equipments = JSON.parse(localStorage.getItem("equipments"));
+	    	document.getElementById('current_page').innerText = equipments.title[type];
+	    	//生成侧栏菜单
+	    	getsideBar(equipments.title,type);
+	    	//生成设备ID列表
+	    	table_names = equipments["content"][type];
+	    	//生成设备列表下拉框
+	    	for(var i=0; i<table_names.length; i++){
+				$('#place').append("<option value='"+table_names[i]+"'>"+table_names[i]+"</option>");
+			}
+	    	//生成条形图的下拉框
+	    	for(var i=0; i<table_names.length; i++){
+				$('#inner_equip').append("<option value='"+table_names[i]+"_eq'>"+table_names[i]+"_eq</option>");
+			}
+	    	//获取内部设备列表
+			getBarData();
+	    	//绘制执行设备条形图
+	    	getequ_type();
+	    	//绘图
+	    	table_name = $('#place').val();
+	    	initLineHead(table_name);
+	    	getData(curPage);
+	    	getErrorCount();
+	    	//设备条形图选择绑定
+	    	$('#equ_type').on('click',function(){
+				getequ_type();
+	    	});
+	    	//绑定条形图设备ID选择框的触发事件
+	    	$('#inner_equip').on('change',function(){
+	    		getErrorCount();
+	    		getBarData();
+	    	});
+	    	//绑定折线图设备ID选择框的触发事件
+	    	$('#place').on('change',function(){
+	    		table_name = $('#place').val();
+	    		initLineHead(table_name);
+	    	});
+	    	
+	    });
+	    
+		//初始化折线图的标题栏
+		function initLineHead(table_name){
+			var date = new Date();
+			var formatDate = getformatDate(date);
+			$('#date').val(formatDate);
+			//先清空已有数据
+			index = 0;	//绘图分页记录
+			btnOn = 1;	//所按下按钮
+	      	innerdata = [];
+	      	dataType = [];
+			var i = 0;
+	        while(i<6){
+	            var id =  "btn"+(i+1);
+	            document.getElementById(id).innerText = "";
+	            i++;
+	        }
+	    	$.ajax({
+		          url:'../Paint/title',
+		          data: {'table_name':table_name},
+		          contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+		          type:'POST',
+		          dataType: 'json',
+		          success:function(data){
+		              	console.log(data);
+		              	var i = 0;
+		              	for(var key in data){
+		              		innerdata[i] = key;
+		              		dataType[i] = data[key];
+		              		i++;
+		              	}
+		              	console.log(dataType);
+				        document.getElementById('left').removeAttribute('href'); 
+				        var length = dataType.length<6?dataType.length:6;
+				        for(var i = 0; i < length; i++){
+				            var id =  "btn"+(i+1);
+				            document.getElementById(id).innerText = dataType[i];
+				            (function(arg){
+				            	document.getElementById(id).onclick = function(){
+				            		change(arg+1,innerdata[arg]);
+				                };
+				            })(i) 
+				        }			        
+						$.ajax({
+					        url:'../Paint/lineChart',
+					        data: {'type':innerdata[0],'date':formatDate,"table_name":table_name},
+					        contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+					        type:'POST',
+					        dataType:'json',
+					        success:function(data){
+					        	paintLine(data);
+					        }
+					    });
+		          }
+		      });
+		}
+		
+	    //获取条形图数据
+	    function getBarData(){
+	    	var inner_equip = $('#inner_equip').val();
+	    	$.ajax({
+	    		url:'../Equipment/inner_data',
+		        data: {'table_name':inner_equip},
+		        contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+		        type:'POST',
+		        async:false,
+		        dataType: 'json',
+		        success:function(data){
+		        	inner_data = data;
+		        	for(var key in data){
+		        		var name = "";
+		        		if(key.indexOf("perform") >= 0){
+		        			name = key.replace("perform","执行器");
+		        		}else if(key.indexOf("remote") >= 0){
+		        			name = key.replace("remote","传感器");
+		        		}
+		        		$('#equ_type').append("<option value='"+key+"'>"+name+"</option>");
+		        	}
+		        }
+	    	})
+	    }
+	    
+	    //生成侧栏菜单
+	    function getsideBar(json,type){
+	        for(var key in json){
+	            var li = document.createElement("li");
+	            if(key == type){
+	                li.style.backgroundColor = "rgb(1, 1, 59)";
+	                var img = document.createElement("img");
+	                img.src = img.src = "../resources/images/"+key+".png";
+	                img.alt = "";
+	                li.appendChild(img);
+	            }else{
+	                var a = document.createElement("a");
+	                a.setAttribute("href","system.html?type="+key);
+	                a.className = "bttn";
+	                a.id =  key;
+	                var img = document.createElement("img");
+	                img.src = "../resources/images/"+key+".png";
+	                img.alt = "";
+	                var div = document.createElement("div");
+	                div.className = "tips";
+	                div.id = "tips_"+key;
+	                div.innerText = json[key];
+	                a.appendChild(img);
+	                li.appendChild(a);
+	                li.appendChild(div);
+	            }
+	            document.getElementsByClassName("side_menu")[0].appendChild(li);
+	        }
+	        var li = document.createElement("li");
+	        var a = document.createElement("a");
+	        a.setAttribute("href","main.html");
+	        a.className = "bttn";
+	        a.id = "back";
+	        var img = document.createElement("img");
+	        img.src = "../resources/images/index.png";
+	        img.alt = "";
+	        var div = document.createElement("div");
+	        div.className = "tips";
+	        div.id = "tips_back";
+	        div.innerText = "返回主页";
+	        a.appendChild(img);
+	        li.appendChild(a);
+	        li.appendChild(div);
+	        document.getElementsByClassName("side_menu")[0].appendChild(li);
+	    }
+	    
+	    //判断是执行器or传感器
+	    function getequ_type(){
+    		var t = $('#equ_type').val();
+    		paintBar(inner_data[t]["title"],inner_data[t]["value"]);
+	    }
+	    
+		//获取分页条
+		function getPageBar(){
+			var pageStr;
+			if(curPage > totalPage){
+				curPage = totalPage;
+			}
+
+				pageStr = "<span>共" + totalPage + "页</span><span>" + curPage + "/"  + totalPage + "</span>";
+
+			 //如果是第一页    
+	        if (curPage == 1) {  
+	            pageStr += "<span>首页</span><span>上一页</span>";  
+	        } else {  
+	            pageStr += "<span><a href='javascript:getData(curPage = 1)'>首页</a></span><span><a href='javascript:getData(--curPage)'>上一页</a></span>";  
+	        }  
+
+	        //如果是最后页    
+	        if (curPage >= totalPage) {  
+	            pageStr += "<span>下一页</span><span>尾页</span>";  
+	        } else {  
+	            pageStr += "<span><a href='javascript:getData(++curPage)' rel='"  
+	                    + (curPage + 1)  
+	                    + "'>下一页</a></span><span><a href='javascript:getData(curPage = totalPage)'>尾页</a></span>";  
+	        }
+	        
+	        $("#pageCount").html(pageStr);
+		}
+		
+		//获取故障设备数量
+		function getErrorCount(){
+			var equip_name = $('#inner_equip').val();
+			$.ajax({
+				url:'../Equipment/error_count',
+		        data: {'table_name':equip_name},
+		        contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+		        type:'POST',
+		        dataType: 'json',
+		        success:function(data){
+		        	document.getElementById('error_count').firstChild.innerText = data.count+"条";
+		        }
+			})
+		}
+		
+		//获取分页数据
+		function getData(page) {  
+	         
+	         $.ajax({  
+	             type : 'POST',  
+	             url : '../Equipment/type',  
+	             data : {  
+	                 'curPage' : page,
+					 'type' : type,
+					 'company_id':company_id
+	             },  
+	             dataType : 'json',  
+	             success : function(json) {
+	            	 console.log(json);
+	                 $("#list_body").empty();   
+	                 totalPage = json.totalPage; //总页数    
+	                 var list = json.equipments;//返回内容 
+	                 //处理表内数据
+	                 for(var i=0;i<list.length;i++){  
+						var body = "<tr>";
+						body+= "<td>"+list[i]["id"]+"</td>";	
+						body+= "<td>"+list[i]["g"]+"</td>";
+						body+= "<td>"+list[i]["n"]+"</td>";
+						body+= "<td>"+list[i]["longitude"]+"</td>";
+						body+= "<td>"+list[i]["latitude"]+"</td>";
+						body+= "<td>"+list[i]["time"]+"</td></tr>";
+						$('#list_body').append(body);
+	                 }  
+	                
+
+	             },  
+	             complete : function() { //生成分页条    
+	            	 getPageBar();  
+	             },  
+	             error : function() {  
+	                 alert("数据加载失败");  
+	             }  
+	         });  
+	     }  
+	    
+	</script>
+<script type="text/javascript" src="../resources/js/chart.js"
+	charset="UTF-8"></script>
+<script type="text/javascript" src="../resources/js/map.js"
+	charset="UTF-8"></script>
+<script type="text/javascript" src="../resources/js/china.js"
+	charset="UTF-8"></script>
+<script type="text/javascript" src="../resources/js/button.js"
+	charset="UTF-8"></script>
+</html>

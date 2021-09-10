@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xumu.programmer.dao.EquipmentDao">
+	<!-- 根据用户名查找用户所有信息 -->
+	<select id="getEquipmentByType" resultType="Equipment">
+		select * from equipment where type = #{type} and company_id = #{company_id} limit #{start} , 5
+	</select>
+	<!-- 查找饲喂设备 -->
+	<select id="getFeedEquip" parameterType="String" resultType="java.util.HashMap">
+	    select * from equipment where company_id=#{company_id} and type = "feed"
+	</select>
+	<select id="getEquipCount" resultType="Integer">
+		select count(*) from equipment where type = #{type} and company_id = #{company_id}
+	</select>
+	
+	<!-- 根据用户id查找用户已购设备 -->
+	<select id="getEquipByAid" parameterType="String" resultType="java.util.HashMap">
+		select id, type,type_value from equipment where company_id = #{company_id} order by time desc
+	</select>
+	
+	<select id="getFeedEquipmentByHouse" parameterType="String" resultType="String">
+	    select id from equipment where company_id = #{company_id} and house=#{house} and town=#{town}
+	</select>
+	
+	<select id="getHousesByTown" parameterType="String" resultType="String">
+	    select house from equipment where company_id = #{company_id} and town=#{town}
+	</select>
+	
+	<!-- 判断是设备ID是否存在 -->
+	<select id="idExist" parameterType="String" resultType="java.util.HashMap">
+		select * from equipment where id = #{id} 
+	</select>
+	
+	<!-- 判断是否有重复节点 -->
+	<select id="NodeExist" parameterType="Integer" resultType="java.util.HashMap">
+		select * from equipment where G = #{G} and N = #{N} and company_id=#{company_id}
+	</select>
+	
+	<!-- 根据类型和单元查询设备 -->
+	<select id="getEquipByType" parameterType="String" resultType="Equipment">
+		select * from equipment where company_id = #{company_id} and unit = #{unit} and type=#{type}
+	</select>
+	
+	
+	<!-- 查询某个设备表的所以测量数据 -->
+	<select id="getAllDataOfElement" parameterType="String" resultType="java.util.HashMap">
+		select * from ${table_name} 
+	</select>
+	
+	<!-- 获取某个设备的测量数据，根据时间段 -->
+	<select id="getElementDataByTime" parameterType="String" resultType="java.util.HashMap">
+		select * from ${table_name} where timestamp &gt;= #{start} and timestamp &lt;=#{out}
+	</select>
+	
+	<!-- 获取某个单元某类型设备 -->
+	<select id="queryEquipmentOfUnit" parameterType="String" resultType="Equipment">
+		select * from equipment where unit = #{unit} and type = #{type} and company_id = #{company_id}
+	</select>
+	<!-- 添加新系统 -->
+	<insert id="addSystem" parameterType="Equipment">
+		insert into equipment(company_id,id,G,N,type,type_value,longitude,latitude,area,town,house,unit,time) values(#{company_id},#{id},#{G},#{N},#{type},#{type_value},#{longitude},#{latitude},#{area},#{town},#{house},#{unit},null)
+	</insert>
+	<!-- 删除系统 -->
+	<delete id="delete" parameterType="String">
+		delete from equipment where company_id = #{company_id} and id = #{id}
+	</delete>
+	
+	<!-- 删除设备数据表 -->
+	<update id="deleteDataTable" parameterType="String">
+		drop table ${id}
+	</update>
+	
+	<!-- 删除设备数据子设备表 -->
+	<update id="deleteTable" parameterType="String">
+		drop table ${equip_table}
+	</update>
+	
+	<!-- 设备开关 -->
+	<update id="switchEquip">
+		update equipment set status = #{status} where id = #{id} and company_id=#{company_id}
+	</update>
+	
+	<!-- 创建新的子设备表 -->
+	<update id="addSystemEquip" parameterType="String">  
+        CREATE TABLE ${id} (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `e_id` varchar(15) NOT NULL COMMENT '设备编号',
+  `name` varchar(10) NOT NULL COMMENT '设备名称',
+  `type` varchar(15) NOT NULL COMMENT '设备类型',
+  `status` tinyint(1) NOT NULL COMMENT '设备状态',
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '添加时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+    </update> 
+    
+    <!-- 创建元素表格 -->
+    <update id="createElementTable">
+    	CREATE TABLE ${table_name} (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  <foreach collection="elements" item="elements" separator="," open="" close="">  
+  `${elements.key}` varchar(45) DEFAULT NULL COMMENT '${elements.value}'
+  </foreach>
+  ,`timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+    </update>
+</mapper>

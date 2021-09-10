@@ -1,0 +1,328 @@
+body {
+	/* background: url(../images/dash_bg.png) no-repeat;
+    background-size: 120% 120%; */
+	background-color: #0b122e;
+	color: #ffffff;
+}
+
+#div {
+	margin-bottom: 1%;
+	width: 100%;
+}
+
+header {
+	width: 100%;
+	height: 90px;
+	background: url(../images/bg_top.png) center no-repeat;
+	color: #fafad2;
+	text-align: center;
+	font-size: 36px;
+	line-height: 90px;
+	margin: 0 auto;
+}
+
+header #current_page {
+	float: left;
+	position: absolute;
+	font-size: 25px;
+	color: aqua;
+	font-weight: bold;
+}
+
+.air {
+	position: absolute;
+	right: 330px;
+	top: 10px;
+}
+
+.alarm {
+	position: absolute;
+	right: 200px;
+	top: 10px;
+}
+
+.warn {
+	position: absolute;
+	right: 265px;
+	top: 10px;
+}
+
+#cur_time {
+	right: 0px;
+	top: 0px;
+	position: absolute;
+	text-align: center;
+	font-size: 0.7em;
+	font-family: "微软雅体";
+	color: beige;
+}
+
+.tips {
+	display: none;
+	width: 70px;
+	height: 30px;
+	border-radius: 10px;
+	padding: 20px;
+	position: absolute;
+	background-color: #2F4056;
+	color: #ffffff;
+}
+
+#sidebar {
+	width: 100px;
+	height: 100%;
+	float: left;
+	background: rgba(0, 0, 0, 0.3);
+	margin: 0px 5px 0px 0px;
+	position: absolute;
+}
+
+#content_main {
+	float: left;
+	width: 2100px;
+	height: 100%;
+	margin: 0px 0px 0px 110px;
+}
+
+ul {
+	width: 100%;
+	height: 100%;
+	float: left;
+	background: rgba(0, 0, 0, 0.3);
+	margin: 0px;
+	padding-left: 0px;
+}
+
+.side_menu {
+	float: left;
+}
+
+.side_menu li {
+	height: 100px;
+	text-align: center;
+	color: #636363;
+	font-size: 16px;
+	list-style: none;
+	padding-top: 20px;
+}
+
+.side_menu a {
+	text-decoration: none;
+}
+
+.side_menu li:hover {
+	background-color: rgb(1, 1, 59);
+}
+
+/*
+    主题部分样式
+*/
+.content_left {
+	width: 300px;
+	height: 100%;
+	float: left;
+	font-weight: bold;
+	font-family: "微软雅体";
+	font-size: 20px;
+	color: aqua;
+	text-align: center;
+	margin: 5px 10px 0px 0px;
+}
+
+.content_left .calendar {
+	width: 320px;
+	height: 400px;
+	float: left;
+	background: url(../images/hangye.png) no-repeat;
+	background-size: 100% 100%;
+	margin-bottom: 5px;
+}
+
+#inner_calendar {
+	width: 320px;
+	padding: 10px 20px 0px 0px;
+}
+
+.content_left .equipment {
+	width: 320px;
+	height: 400px;
+	float: left;
+	background: url(../images/bg_report.png) no-repeat;
+	background-size: 100% 100%;
+	margin-top: 5px;
+}
+
+.content_left #title {
+	width: 320px;
+	line-height: 55px;
+	background: url(../images/line.png) no-repeat bottom center;
+}
+
+.equipment #equipment_online {
+	width: 320px;
+	padding: 10px;
+}
+
+.content_center {
+	width: 700px;
+	height: 100%;
+	float: left;
+	margin: 5px 5px 0px 25px;
+	text-align: center;
+	font-weight: bold;
+	font-family: "微软雅体";
+	font-size: 20px;
+	color: aqua;
+}
+
+.content_center .map {
+	width: 700px;
+	height: 400px;
+	background: url(../images/hangye.png) no-repeat;
+	background-size: 100% 100%;
+}
+
+.map #map {
+	margin-left: 20px;
+}
+
+.content_center .list {
+	width: 700px;
+	height: 400px;
+	background: url(../images/bg_report.png) no-repeat;
+	margin-top: 10px;
+	background-size: 100% 100%;
+}
+
+.list #equipment_list {
+	margin: 20px;
+	border-width: 3px;
+	border-color: solid aqua;
+	border-collapse: collapse;
+}
+
+.list #equipment_list th {
+	border-width: 3px;
+	border-style: solid;
+	border-color: aqua;
+	padding: 5px;
+}
+
+.list #equipment_list tr td, .list #equipment_list tr th {
+	text-align: center;
+	color: #ffffff;
+	border: 3px solid aqua;
+	padding: 5px;
+}
+
+.content_center #title {
+	width: 700px;
+	line-height: 50px;
+	background: url(../images/line.png) no-repeat bottom center;
+}
+
+/*
+右侧部分
+*/
+.content_right {
+	width: 700px;
+	height: 100%;
+	float: left;
+	text-align: center;
+	font-weight: bold;
+	font-family: "微软雅体";
+	font-size: 20px;
+	color: aqua;
+	margin: 5px 0px 0px 5px;
+}
+
+.content_right .equipment_manager {
+	width: 700px;
+	height: 400px;
+	background: url(../images/hangye.png) no-repeat;
+	background-size: 100% 100%;
+}
+
+.content_right #equipment_count {
+	float: left;
+}
+
+.content_right #tip {
+	float: left;
+	width: 100px;
+	margin-top: 50px;
+	margin-right: 20px;
+}
+
+#tip #warning {
+	background: url(../images/report01.png) no-repeat top;
+	line-height: 100px;
+	background-size: 100% 100%;
+	color: red;
+}
+
+#tip #error {
+	background: url(../images/report02.png) no-repeat;
+	line-height: 100px;
+	background-size: 100% 100%;
+	color: red;
+}
+
+.content_right #title {
+	width: 700px;
+	background: url(../images/line.png) no-repeat bottom center;
+	line-height: 55px;
+}
+
+.count {
+	line-height: 0px;
+	float: center;
+}
+/*
+环境数据部分
+*/
+.content_right .environment_manager {
+	width: 700px;
+	height: 400px;
+	background: url(../images/zuo2.png) no-repeat;
+	background-size: 100% 100%;
+	margin-top: 10px;
+	padding: 0px 5px 0px 5px;
+}
+
+.environment_manager #select_head {
+	width: 100%;
+	height: 35px;
+	color: #ffffff;
+	margin-top: 10px;
+}
+
+#select_head a {
+	float: left;
+	width: 100px;
+	height: 35px;
+	border: 1px solid #ffffff;
+	color: #ffffff;
+	font-size: 20px;
+	text-decoration: none;
+	background-color: rgb(4, 51, 138);
+	padding-top: 10px;
+}
+
+#select_head .btn:hover {
+	background-color: rgb(1, 1, 59) !important;
+}
+
+#select_combo {
+	font-size: 18px;
+	color: #ffffff;
+	height: 25px;
+	margin: 5px 0px 0px 240px;
+
+}
+
+@media screen and (max-width: 1600px) {
+  	html{
+		zoom : 0.8;
+	}
+}

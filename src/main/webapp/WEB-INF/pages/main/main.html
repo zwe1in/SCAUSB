@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+        <title>智能猪只数据管理平台</title>
+        <script src="../resources/layui/layui.js"></script>
+        <script src="../resources/js/jquery-1.8.0.min.js"></script>
+        <link rel="stylesheet" href="../resources/css/main.css">
+    </head>
+
+    <body>
+        <div class="banner">
+            <div class="container">
+                <div class="header-nav">
+                    <nav class="navbar navbar-default">
+                        <!--链接标签-->
+                        <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
+                            <nav class="cl-effect-1">
+                                <ul class="nav navbar-nav ">
+                                    <li><a class="hvr-overline-from-left button2 active" href="index.html">Home</a></li>
+                                    <li><a class="hvr-overline-from-left button2" href="about.html">About</a></li>
+                                    <li><a class="hvr-overline-from-left button2" href="shortcodes.html">Shortcodes</a></li>
+                                    <li><a class="hvr-overline-from-left button2" href="gallery.html">Gallery</a></li>
+                                    <li><a class="hvr-overline-from-left button2" href="quit">quit</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="navbar-header logo">
+                            <h1>
+                                <a class="navbar-brand" href="index.html"><span>SCAU</span><i>LAPBIP</i></a>
+                            </h1>
+                        </div>
+                        <div class="user-name">
+                            <h2>欢迎，</h2>
+                            <h3>身份：  </h3>
+                        </div>
+                    </nav>
+                </div>
+                <div id="top" class="callbacks_container">
+                    <ul class="rslides" id="slider3">
+                        <li>
+                            <div class="banner-text">
+                                <h4>智能猪只数据管理平台</h4>
+                                <p>South China Agricultural University Smart Pig Data Management Iot Platform</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="banner-bottom" class="welcome">
+            <div class="container">
+                <div class="seed-grid">
+                    <div class="hi-icon-wrap hi-icon-effect-4 hi-icon-effect-4b" id="coco">
+                        <div class="abt-icon">
+                            <a href="index.html" class="hi-icon icon1"></a>
+                            <h4>综合展示</h4>
+                        </div>
+                        <div class="abt-icon">
+                            <a href="vedio.html" class="hi-icon icon2"></a>
+                            <h4>监控展示</h4>
+                        </div>
+                        <div class="abt-icon">
+                            <a href="accountant.html" class="hi-icon icon3"></a>
+                            <h4>系统设置</h4>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    
+    <script type="text/javascript">
+    	var user_name = "";
+    	var group_id = "";
+    	var company_id;
+    	$(function(){
+    		user_name = localStorage.getItem("user_name");
+    		group_id = localStorage.getItem("group_id");
+    		company_id = localStorage.getItem("company_id");
+    		console.log(company_id);
+    		$('.user-name').find('h2').append(user_name);
+    		if(group_id == 1){
+    			$('.user-name').find('h3').append("企业级管理员");
+    		}else if(group_id == 2){
+    			$('.user-name').find('h3').append("区域级管理员");
+    		}else if(group_id == 3){
+    			$('.user-name').find('h3').append("市级管理员");
+    		}else if(group_id == 4){
+    			$('.user-name').find('h3').append("场级管理员");
+    		}
+    		
+    		$.ajax({
+    			url:'../Equipment/myequip',
+	        	data: {'company_id':company_id},
+	        	contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+	        	type:'POST',
+	        	dataType: 'json',
+	        	success:function(data){
+	        		localStorage.setItem("equipments",JSON.stringify(data));
+	        		console.log(data);
+					createList(data.title);
+	        	}
+    		})
+    	})
+    	
+    	function createList(json){
+            for(var key in json){
+                var div = document.createElement("div");
+                div.className = "abt-icon";
+                var a = document.createElement("a");
+                a.href = "system?type="+key;
+                a.className = "hi-icon";
+                a.style.backgroundRepeat = "no-repeat";
+                a.style.backgroundPosition = "center";
+                a.style.backgroundImage = "url(../resources/images/"+key+".png)";
+                var h4 = document.createElement("h4");
+                h4.innerText = json[key];
+                div.appendChild(a);
+                div.appendChild(h4);
+                document.getElementById("coco").appendChild(div);
+            }
+    	}
+    </script>
+    <script type="text/javascript" src="../resources/js/test.js"></script>
+</html>
